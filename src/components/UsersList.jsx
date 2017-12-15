@@ -19,7 +19,7 @@ const UsersList = (props) => {
           {
             props.users.map((user) => {
               return (
-                  <Table.Row>
+                  <Table.Row key={user.id}>
                     <Table.Cell>{user.id}</Table.Cell>
                     <Table.Cell>{user.email}</Table.Cell>
                     <Table.Cell>{user.username}</Table.Cell>
@@ -32,7 +32,7 @@ const UsersList = (props) => {
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan='3'>
+            <Table.HeaderCell colSpan='4'>
               <Menu floated='right' pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='left chevron' />
