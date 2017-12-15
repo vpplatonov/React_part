@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form} from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-
+import FormErrors from './FormError';
 
 class UserForm extends Component {
   constructor (props) {
@@ -12,7 +12,34 @@ class UserForm extends Component {
         username: '',
         email: '',
         password: ''
-      }
+      },
+      formRules: [
+        {
+          id: 1,
+          field: 'username',
+          name: 'Username must be greater than 5 characters.',
+          valid: false
+        },
+        {
+          id: 2,
+          field: 'email',
+          name: 'Email must be greater than 5 characters.',
+          valid: false
+        },
+        {
+          id: 3,
+          field: 'email',
+          name: 'Email must be a valid email address.',
+          valid: false
+        },
+        {
+          id: 4,
+          field: 'password',
+          name: 'Password must be greater than 10 characters.',
+          valid: false
+        }
+      ],
+      valid: false
     }
     this.handleUserFormSubmit = this.handleUserFormSubmit.bind(this);
   }
@@ -22,6 +49,7 @@ class UserForm extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.formType !== nextProps.formType) {
       this.clearForm();
+      this.initRules();
     }
   }
   clearForm() {
@@ -33,6 +61,7 @@ class UserForm extends Component {
     const obj = this.state.formData;
     obj[event.target.name] = event.target.value;
     this.setState(obj);
+    this.validateForm();
   }
   handleUserFormSubmit(event) {
     event.preventDefault();
@@ -59,6 +88,42 @@ class UserForm extends Component {
         })
         .catch((err) => { console.log(err); })
   }
+  validateForm() {
+      const formType = this.props.formType;
+      const rules = this.state.formRules;
+      const formData = this.state.formData;
+      this.setState({valid: false});
+      for (const rule of rules) {
+        rule.valid = false;
+      }
+      if (formType === 'Register') {
+        if (formData.username.length > 5) rules[0].valid = true;
+      }
+      if (formType === 'Login') rules[0].valid = true;
+      if (formData.email.length > 5) rules[1].valid = true;
+      if (this.validateEmail(formData.email)) rules[2].valid = true;
+      if (formData.password.length > 10) rules[3].valid = true;
+      this.setState({formRules: rules})
+      if (this.allTrue()) this.setState({valid: true});
+  }
+  validateEmail(email) {
+      // eslint-disable-next-line
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  }
+  allTrue() {
+      for (const rule of this.state.formRules) {
+        if (!rule.valid) return false;
+      }
+      return true;
+  }
+  initRules() {
+      const rules = this.state.formRules;
+      for (const rule of rules) {
+        rule.valid = false;
+      }
+      this.setState({formRules: rules})
+  }
 
   render() {
       if (this.props.isAuthenticated) {
@@ -68,7 +133,7 @@ class UserForm extends Component {
       return (
           <div>
               <h1>{this.props.formType}</h1>
-              <Form onSubmit={(event) => this.props.handleUserFormSubmit(event)}>
+              <Form onSubmit={(event) => this.handleUserFormSubmit(event)}>
                   {this.props.formType === 'Register' &&
                   <Form.Field>
                       <label>Username</label>
@@ -77,8 +142,8 @@ class UserForm extends Component {
                           type="text"
                           placeholder="Enter a username"
                           required
-                          value={this.props.formData.username}
-                          onChange={this.props.handleFormChange}
+                          value={this.state.formData.username}
+                          onChange={this.handleFormChange.bind(this)}
                       />
                   </Form.Field>
                   }
@@ -89,8 +154,8 @@ class UserForm extends Component {
                           type='email'
                           required
                           placeholder='Enter a email address'
-                          value={this.props.formData.email}
-                          onChange={this.props.handleFormChange}
+                          value={this.state.formData.email}
+                          onChange={this.handleFormChange.bind(this)}
                       />
                   </Form.Field>
                   <Form.Field>
@@ -100,12 +165,22 @@ class UserForm extends Component {
                           type="password"
                           required
                           placeholder="Enter a password"
-                          value={this.props.formData.password}
-                          onChange={this.props.handleFormChange}
+                          value={this.state.formData.password}
+                          onChange={this.handleFormChange.bind(this)}
                       />
                   </Form.Field>
-                  <Button type='submit'>Submit</Button>
+
+                  <Button
+                      type='submit'
+                      disabled={!this.state.valid}
+                  >Submit</Button>
               </Form>
+              {!this.state.valid &&
+                  <FormErrors
+                      formType={this.props.formType}
+                      formRules={this.state.formRules}
+                   />
+              }
           </div>
       )
   }
