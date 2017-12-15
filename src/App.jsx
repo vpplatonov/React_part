@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Divider } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import UsersList from './components/UsersList';
-import AddUser from './components/AddUser';
 import About from './components/About';
 import NavBar from './components/Navbar';
 import UserForm from './components/Form';
@@ -111,15 +110,6 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' render={() => (
                   <div>
-                    <h1>Add Users</h1>
-                    <AddUser
-                      username={this.state.username}
-                      email={this.state.email}
-                      handleChange={this.handleChange.bind(this)}
-                      addUser={this.addUser.bind(this)}
-                    />
-                    <Divider />
-                    <h1>All Users</h1>
                     <UsersList users={this.state.users}/>
                   </div>
                 )} />
