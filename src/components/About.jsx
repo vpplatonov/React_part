@@ -1,10 +1,12 @@
 import React from 'react';
+import { Divider } from 'semantic-ui-react';
 
 const About = () => (
   <div>
     <h1>About</h1>
-    <hr/><br/>
-    <p>Add something relevant here.</p>
+    <Divider/>
+    <h2>Customer portal.</h2>
+    <p>Flask/React/jsonAPI</p>
   </div>
 )
 

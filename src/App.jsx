@@ -57,14 +57,14 @@ class App extends Component {
                 <Route exact path='/about' component={About}/>
                 <Route exact path='/register' render={() => (
                   <UserForm
-                    formType={'Register'}
+                    formType={'register'}
                     isAuthenticated={this.state.isAuthenticated}
                     loginUser={this.loginUser.bind(this)}
                   />
                 )} />
                 <Route exact path='/login' render={() => (
                   <UserForm
-                    formType={'Login'}
+                    formType={'login'}
                     isAuthenticated={this.state.isAuthenticated}
                     loginUser={this.loginUser.bind(this)}
                   />

@@ -8,7 +8,7 @@ const FormErrors = (props) => {
               // eslint-disable-next-line
               props.formRules.map((rule) => {
                   if (rule.field === 'username') {
-                      if (props.formType === 'Register') {
+                      if (props.formType === 'register') {
                           return (
                               !rule.valid && <Message.Item key={rule.id} content={rule.name}/>
                           )

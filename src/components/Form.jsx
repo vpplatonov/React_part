@@ -35,7 +35,7 @@ class UserForm extends Component {
         {
           id: 4,
           field: 'password',
-          name: 'Password must be greater than 10 characters.',
+          name: 'Password must be greater than 3 characters.',
           valid: false
         }
       ],
@@ -96,13 +96,13 @@ class UserForm extends Component {
       for (const rule of rules) {
         rule.valid = false;
       }
-      if (formType === 'Register') {
+      if (formType === 'register') {
         if (formData.username.length > 5) rules[0].valid = true;
       }
-      if (formType === 'Login') rules[0].valid = true;
+      if (formType === 'login') rules[0].valid = true;
       if (formData.email.length > 5) rules[1].valid = true;
       if (this.validateEmail(formData.email)) rules[2].valid = true;
-      if (formData.password.length > 10) rules[3].valid = true;
+      if (formData.password.length >= 3) rules[3].valid = true;
       this.setState({formRules: rules})
       if (this.allTrue()) this.setState({valid: true});
   }
@@ -134,7 +134,7 @@ class UserForm extends Component {
           <div>
               <h1>{this.props.formType}</h1>
               <Form onSubmit={(event) => this.handleUserFormSubmit(event)}>
-                  {this.props.formType === 'Register' &&
+                  {this.props.formType === 'register' &&
                   <Form.Field>
                       <label>Username</label>
                       <input
@@ -175,12 +175,12 @@ class UserForm extends Component {
                       disabled={!this.state.valid}
                   >Submit</Button>
               </Form>
-              {!this.state.valid &&
-                  <FormErrors
-                      formType={this.props.formType}
-                      formRules={this.state.formRules}
-                   />
-              }
+                  {!this.state.valid &&
+                      <FormErrors
+                          formType={this.props.formType}
+                          formRules={this.state.formRules}
+                       />
+                  }
           </div>
       )
   }
