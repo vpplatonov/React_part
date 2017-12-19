@@ -27,12 +27,12 @@ class App extends Component {
     this.getUsers();
   }
   getUsers() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/users`)
         .then((res) => { this.setState({ users: res.data.data.users }); })
         .catch((err) => { console.log(err); })
   }
   getSenders() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/senders`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/senders`)
         .then((res) => { this.setState({ senders: res.data.data.senders }); })
         .catch((err) => { console.log(err); })
   }
