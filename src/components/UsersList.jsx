@@ -8,7 +8,7 @@ const UsersList = (props) => {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>User ID</Table.HeaderCell>
+            <Table.HeaderCell>{props.title === 'Senders' ? 'Sender ID' : 'User ID'}</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
             <Table.HeaderCell>Username</Table.HeaderCell>
             <Table.HeaderCell>Created Date</Table.HeaderCell>
