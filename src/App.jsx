@@ -8,14 +8,19 @@ import NavBar from './components/Navbar';
 import UserForm from './components/Form';
 import Logout from './components/Logout';
 import UserStatus from './components/UserStatus';
+import DashboardComponent from './containers/Dashboard/components/';
+import { Redirect } from 'react-router-dom';
+import {Helmet} from 'react-helmet'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       users: [],
+      senders: [],
       title: 'TestDriven.io',
-      isAuthenticated: false
+      isAuthenticated: false,
+      isAdmin: false
     }
   }
   componentDidMount() {
@@ -26,6 +31,11 @@ class App extends Component {
         .then((res) => { this.setState({ users: res.data.data.users }); })
         .catch((err) => { console.log(err); })
   }
+  getSenders() {
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/senders`)
+        .then((res) => { this.setState({ senders: res.data.data.senders }); })
+        .catch((err) => { console.log(err); })
+  }
   logoutUser() {
     window.localStorage.clear();
     this.setState({ isAuthenticated: false });
@@ -34,30 +44,55 @@ class App extends Component {
     window.localStorage.setItem('authToken', token);
     this.setState({ isAuthenticated: true });
     this.getUsers();
+    this.getSenders();
   }
 
   render() {
     return (
       <div>
-        <NavBar
-            title={this.state.title}
-            isAuthenticated={this.state.isAuthenticated}
-         />
+          {this.state.isAuthenticated &&
+          <NavBar
+              title={this.state.title}
+              isAuthenticated={this.state.isAuthenticated}
+          />
+          }
           <Grid columns={3}>
             <Grid.Row>
               <Grid.Column width={1}>
               </Grid.Column>
               <Grid.Column width={14}>
               <Switch>
-                <Route exact path='/' render={() => (
-                  <div>
-                    <UsersList users={this.state.users}/>
-                  </div>
-                )} />
+
+                <Route exact path='/' render={(props) => (
+                    this.state.isAuthenticated
+                    ? <div>
+                        <Helmet>
+					        <title>Dashboard</title>
+				        </Helmet>
+                        <DashboardComponent posts={[{title: 'Dummy', body: 'Empty', id: 1, userId: 1}]} postsLoaded={true} />
+                      </div>
+                    : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+                )}/>
+
+                { this.state.isAuthenticated &&
+                  <Route exact path='/users' render={() => (
+                      <div>
+                          <UsersList users={this.state.users} title={'All Users'}/>
+                      </div>
+                  )}/>
+                }
+                { this.state.isAuthenticated &&
+                  <Route exact path='/senders' render={() => (
+                      <div>
+                          <UsersList users={this.state.senders} title={'Senders'}/>
+                      </div>
+                  )}/>
+                }
                 <Route exact path='/about' component={About}/>
                 <Route exact path='/register' render={() => (
                   <UserForm
                     formType={'register'}
+                    isAdmin={this.state.isAdmin}
                     isAuthenticated={this.state.isAuthenticated}
                     loginUser={this.loginUser.bind(this)}
                   />
@@ -66,6 +101,7 @@ class App extends Component {
                   <UserForm
                     formType={'login'}
                     isAuthenticated={this.state.isAuthenticated}
+                    isAdmin={this.state.isAdmin}
                     loginUser={this.loginUser.bind(this)}
                   />
                 )} />

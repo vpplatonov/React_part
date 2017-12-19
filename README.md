@@ -1,3 +1,8 @@
+1. Using of Semantic-UI-React
+2. Protected ( auth ) routing by class decorators
+3. Dashboard theming with Semantic-UI-react Card / Grid component;
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

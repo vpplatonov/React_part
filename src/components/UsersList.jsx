@@ -4,7 +4,7 @@ import { Icon, Menu, Table } from 'semantic-ui-react';
 const UsersList = (props) => {
   return (
     <div>
-      <h1>All Users</h1>
+      <h1>{props.title}</h1>
       <Table celled>
         <Table.Header>
           <Table.Row>
@@ -21,8 +21,8 @@ const UsersList = (props) => {
               return (
                   <Table.Row key={user.id}>
                     <Table.Cell>{user.id}</Table.Cell>
-                    <Table.Cell>{user.email}</Table.Cell>
-                    <Table.Cell>{user.username}</Table.Cell>
+                    <Table.Cell>{user.email || user.login}</Table.Cell>
+                    <Table.Cell>{user.username || user.label}</Table.Cell>
                     <Table.Cell>{user.created_at}</Table.Cell>
                   </Table.Row>
               )

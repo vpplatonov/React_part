@@ -7,19 +7,31 @@ const NavBar = (props) => (
   <Menu stackable inverted>
     <img src='/logo.png' alt=''/>
     <Menu.Item as={Link} to='/'>
-      Home
+      Dashboard
     </Menu.Item>
+
+    {props.isAuthenticated &&
+      <Menu.Item as={Link} to='/users'>
+          Users
+      </Menu.Item>
+    }
+
+    {props.isAuthenticated &&
+      <Menu.Item as={Link} to='/senders'>
+          Senders
+      </Menu.Item>
+    }
 
     <Menu.Item as={Link} to='/about'>
       About
     </Menu.Item>
-    {props.isAuthenticated &&
+    {props.isAuthenticated && props.isAdmin &&
       <Menu.Item as={Link} to='/status'>
           User Status
       </Menu.Item>
      }
     <Menu.Menu position='right'>
-        {!props.isAuthenticated &&
+        {props.isAuthenticated && props.isAdmin &&
             <Menu.Item as={Link} to='/register'>
                 Register
             </Menu.Item>
