@@ -80,11 +80,11 @@ class UserForm extends Component {
         password: this.state.formData.password
       }
     }
-    const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/api/auth/${formType}`
+    const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`
     axios.post(url, data)
         .then((res) => {
           this.clearForm();
-          this.props.loginUser(res.data.auth_token);
+          this.props.loginUser(res.data.auth_token, res.data.is_admin);
         })
         .catch((err) => { console.log(err); })
   }
@@ -126,7 +126,7 @@ class UserForm extends Component {
   }
 
   render() {
-      if (this.props.isAuthenticated) {
+      if (this.props.isAuthenticated && !this.props.isAdmin) {
           return <Redirect to='/'/>;
       }
 

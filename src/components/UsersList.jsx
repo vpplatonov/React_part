@@ -19,12 +19,12 @@ const UsersList = (props) => {
           {
             props.users.map((user) => {
               return (
-                  <Table.Row key={user.id}>
-                    <Table.Cell>{user.id}</Table.Cell>
-                    <Table.Cell>{user.email || user.login}</Table.Cell>
-                    <Table.Cell>{user.username || user.label}</Table.Cell>
-                    <Table.Cell>{user.created_at}</Table.Cell>
-                  </Table.Row>
+              <Table.Row key={user.id}>
+                <Table.Cell>{user.id}</Table.Cell>
+                <Table.Cell>{user.email || user.login}</Table.Cell>
+                <Table.Cell>{user.username || user.label}</Table.Cell>
+                <Table.Cell>{user.created_at}</Table.Cell>
+              </Table.Row>
               )
             })
           }

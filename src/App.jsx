@@ -27,22 +27,22 @@ class App extends Component {
     this.getUsers();
   }
   getUsers() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/users`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
         .then((res) => { this.setState({ users: res.data.data.users }); })
         .catch((err) => { console.log(err); })
   }
   getSenders() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/senders`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/senders`)
         .then((res) => { this.setState({ senders: res.data.data.senders }); })
         .catch((err) => { console.log(err); })
   }
   logoutUser() {
     window.localStorage.clear();
-    this.setState({ isAuthenticated: false });
+    this.setState({ isAuthenticated: false, isAdmin: false});
   }
-  loginUser(token) {
+  loginUser(token, is_admin = false) {
     window.localStorage.setItem('authToken', token);
-    this.setState({ isAuthenticated: true });
+    this.setState({ isAuthenticated: true, isAdmin: is_admin });
     this.getUsers();
     this.getSenders();
   }
@@ -54,6 +54,7 @@ class App extends Component {
           <NavBar
               title={this.state.title}
               isAuthenticated={this.state.isAuthenticated}
+              isAdmin={this.state.isAdmin}
           />
           }
           <Grid columns={3}>
