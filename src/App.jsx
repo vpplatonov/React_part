@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Divider } from 'semantic-ui-react';
+
 import UsersList from './components/UsersList';
 import About from './components/About';
-import NavBar from './components/Navbar';
+import NavBar from './components/Navigation/Navbar';
 import UserForm from './components/Form';
 import Logout from './components/Logout';
 import UserStatus from './components/UserStatus';
 import DashboardComponent from './containers/Dashboard/components/';
 import DashboardLogin from './components/DashboardLogin/DashboardLogin';
 import LogoSMTP from './components/LogoSMTP';
-import { Redirect } from 'react-router-dom';
-import {Helmet} from 'react-helmet'
+
 
 class App extends Component {
   constructor() {
@@ -29,12 +31,12 @@ class App extends Component {
     this.getUsers();
   }
   getUsers() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/users`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
         .then((res) => { this.setState({ users: res.data.data.users }); })
         .catch((err) => { console.log(err); })
   }
   getSenders() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/senders`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/senders`)
         .then((res) => { this.setState({ senders: res.data.data.senders }); })
         .catch((err) => { console.log(err); })
   }
@@ -54,15 +56,21 @@ class App extends Component {
       <div>
           <LogoSMTP/>
           {this.state.isAuthenticated &&
-          <NavBar
-              title={this.state.title}
-              isAuthenticated={this.state.isAuthenticated}
-              isAdmin={this.state.isAdmin}
-          />
+          <div>
+              <NavBar
+                  title={this.state.title}
+                  isAuthenticated={this.state.isAuthenticated}
+                  isAdmin={this.state.isAdmin}
+              />
+              <Divider hidden/>
+          </div>
           }
 
           {!this.state.isAuthenticated &&
-            <DashboardLogin/>
+            <div>
+                <DashboardLogin/>
+                <Divider hidden/>
+            </div>
           }
           <Grid columns={3}>
             <Grid.Row>
