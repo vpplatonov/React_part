@@ -1,0 +1,2540 @@
+.App { /* Base font style */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
+  font-size: 15.1px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgba(0, 0, 0, 0.8500);
+  background-color: #f7f7f7;
+}
+
+.App .baseFont * { /* Base font style override for UI framework components */
+  font-size: 15.1px;
+}
+
+.App .appBg {
+  background-color: #f7f7f7;
+}
+
+.App .cardBg {
+  background-color: white;
+}
+
+.App .baseTextBg { /* Base text color as background */
+  background-color: rgba(0, 0, 0, 0.8500);
+}
+
+.App .secondaryTextColor {
+  color: rgba(0, 0, 0, 0.5000);
+}
+
+.App .secondaryTextBg {
+  background-color: rgba(0, 0, 0, 0.5000);
+}
+
+.App .primaryTextColor {
+  color: #bfda5a;
+}
+
+.App .primaryBg {
+  background-color: #bfda5a;
+}
+
+.App .highlightTextColor {
+  color: #91b00d;
+}
+
+.App .highlightBg {
+  background-color: #91b00d;
+}
+
+/* Styles to customize the UI framework plugin (MUI, https://muicss.com) */
+.mui-btn {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.mui-btn--primary {
+    background-color: #bfda5a;
+}
+.mui-btn--primary:active, .mui-btn--primary:focus, .mui-btn--primary:hover {
+    background-color: #c5de6a;
+}
+.mui-btn--accent {
+    background-color: #91b00d;
+}
+.mui-btn--accent:active, .mui-btn--accent:focus, .mui-btn--accent:hover {
+    background-color: #9cb825;
+}
+.mui-textfield {  /* Reset UI framework styling that affects layout */
+    padding-top: 0;
+    margin-bottom: 0;
+}
+.mui-checkbox, .mui-radio {  /* Reset UI framework styling that affects layout */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.mui-select {  /* Reset UI framework styling that affects layout */
+    padding-top: 0;
+    margin-bottom: 0;
+}
+.mui-btn+.mui-btn {  /* Reset UI framework styling that affects layout */
+    margin-left: 0;
+}
+.mui-btn--fab {  /* Reset UI framework styling that breaks compositing */
+    z-index: auto;
+}
+
+@keyframes fadeIn {
+    0%   { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+@keyframes slideIn_right {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+@keyframes slideIn_bottom {
+    0%   { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+}
+
+/* App-wide text styles specified in React Studio */
+.App .actionFont {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
+  font-size: 14.2px;
+  font-weight: 400;
+}
+.App .actionFont * {
+  font-size: 14.2px;
+}
+.App .headlineFont {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
+  font-size: 19.4px;
+  font-weight: 400;
+}
+
+.App .headlineFont * {
+  font-size: 19.4px;
+}
+.App .navBar {
+  background-color: #bfda5a;
+  color: black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
+  font-size: 18px;
+}
+
+.App .navBar a {
+  color: black;
+}
+
+.App .navBar .title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  padding: 4px;
+  margin-top: 14px;
+}
+
+.App .navBar .backBtn {
+  position: absolute;
+  padding: 4px;
+  margin-left: 14px;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+@media (min-width: 320px) {
+  .mui-container {
+    max-width: 320px;
+  }
+}
+@media (min-width: 568px) {
+  .mui-container {
+    max-width: 568px;
+  }
+}
+@media (min-width: 768px) {
+  .mui-container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .mui-container {
+    max-width: 1024px;
+  }
+}
+
+.AppScreen {
+  padding-left: 0;
+  padding-right: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.App .background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.App .layoutFlow {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  float: left;
+}
+.App .layoutFlow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.App .layoutFlow .flowRow {
+  position: relative;
+  width: 100%;
+}
+
+.App .screenFgContainer {
+  /* Items in the foreground group within a screen are placed with fixed positioning */
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.App .foreground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.App .compContent {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.App ul {
+  margin: 0;
+  padding: 0;
+}
+.App li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  position: relative;
+}
+.App .hasNestedComps {
+  position: relative;
+}
+.App .hasNestedComps:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.App .hasNestedComps .background {
+  position: absolute;
+}
+.App .hasNestedComps .layoutFlow {
+  position: relative;
+}
+.App .hasNestedComps .foreground {
+  position: absolute;
+}
+.App .bottomAlignedContent {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Narrowest size for component's responsive layout */
+  .SettingsDropdown {
+    min-height: 175px;
+  }
+@media (min-width: 568px) {
+  .SettingsDropdown {
+    min-height: 175px;
+  }
+}
+@media (min-width: 768px) {
+  .SettingsDropdown {
+    min-height: 174px;
+  }
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown {
+    min-height: 174px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .SettingsDropdown .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+@media (min-width: 568px) {
+  .SettingsDropdown .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .SettingsDropdown .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .SettingsDropdown .elGeneral {
+    line-height: 27px;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elGeneral > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+  .flowRow_SettingsDropdown_elGeneral { 
+  }
+  
+@media (min-width: 568px) {
+  .SettingsDropdown .elGeneral {
+    line-height: 27px;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elGeneral > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+  .flowRow_SettingsDropdown_elGeneral { 
+  }
+  
+}
+@media (min-width: 768px) {
+  .SettingsDropdown .elGeneral {
+    line-height: 27px;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elGeneral > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+  .flowRow_SettingsDropdown_elGeneral { 
+  }
+  
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown .elGeneral {
+    line-height: 27px;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elGeneral > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+  .flowRow_SettingsDropdown_elGeneral { 
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .SettingsDropdown .elSednders {
+    line-height: 27px;
+    position: absolute;
+    top: 38px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elSednders > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+@media (min-width: 568px) {
+  .SettingsDropdown .elSednders {
+    line-height: 27px;
+    position: absolute;
+    top: 38px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elSednders > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .SettingsDropdown .elSednders {
+    line-height: 27px;
+    position: absolute;
+    top: 37px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elSednders > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown .elSednders {
+    line-height: 27px;
+    position: absolute;
+    top: 37px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elSednders > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .SettingsDropdown .elApiBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 71px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elApiBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+@media (min-width: 568px) {
+  .SettingsDropdown .elApiBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 71px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elApiBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .SettingsDropdown .elApiBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 70px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elApiBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown .elApiBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 70px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elApiBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .SettingsDropdown .elNitifBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 106px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elNitifBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+@media (min-width: 568px) {
+  .SettingsDropdown .elNitifBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 106px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elNitifBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .SettingsDropdown .elNitifBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 105px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elNitifBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown .elNitifBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 105px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elNitifBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .SettingsDropdown .elDedecatedBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 140px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elDedecatedBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+@media (min-width: 568px) {
+  .SettingsDropdown .elDedecatedBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 140px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elDedecatedBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .SettingsDropdown .elDedecatedBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 138px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elDedecatedBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .SettingsDropdown .elDedecatedBtn {
+    line-height: 27px;
+    position: absolute;
+    top: 138px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .SettingsDropdown .elDedecatedBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+}
+
+/* This component has a fixed-size layout */
+  .BillingDropdown {
+    min-height: 71px;
+    width: 100%; /* This component was designed using a width of 204px */
+  }
+
+
+  .BillingDropdown .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+
+
+  .BillingDropdown .elButton2 {
+    line-height: 27px;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .BillingDropdown .elButton2 > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .BillingDropdown .elButton3 {
+    line-height: 27px;
+    margin-top: 6px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .BillingDropdown .elButton3 > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+/* This component has a fixed-size layout */
+  .Comp2 {
+    min-height: 186px;
+    width: 100%; /* This component was designed using a width of 748px */
+  }
+
+/* This component has a fixed-size layout */
+  .Comp2 {
+    min-height: 186px;
+    width: 100%; /* This component was designed using a width of 748px */
+  }
+
+
+  .Comp2 .state1_elStatisticsDropDown {
+    position: absolute;
+    margin-top: 2px;
+    width: 198px;
+    margin-left: 0px;
+  }
+  .Comp2 .state1_elStatisticsDropDown > * { 
+  width: 198px;
+  }
+  
+  .flowRow_Comp2_state1_elStatisticsDropDown { 
+  }
+  
+
+/* This component has a fixed-size layout */
+  .Comp2 {
+    min-height: 186px;
+    width: 100%; /* This component was designed using a width of 748px */
+  }
+
+
+  .Comp2 .state2_elSettingsDropdownEl {
+    position: absolute;
+    margin-top: 0px;
+    width: 204px;
+    margin-left: 151px;
+  }
+  .Comp2 .state2_elSettingsDropdownEl > * { 
+  width: 204px;
+  }
+  
+  .flowRow_Comp2_state2_elSettingsDropdownEl { 
+  }
+  
+
+/* This component has a fixed-size layout */
+  .Comp2 {
+    min-height: 186px;
+    width: 100%; /* This component was designed using a width of 748px */
+  }
+
+
+  .Comp2 .state3_elAccountDropDown {
+    position: absolute;
+    margin-top: 0px;
+    width: 230px;
+    margin-left: 298px;
+  }
+  .Comp2 .state3_elAccountDropDown > * { 
+  width: 230px;
+  }
+  
+  .flowRow_Comp2_state3_elAccountDropDown { 
+  }
+  
+
+/* This component has a fixed-size layout */
+  .Comp2 {
+    min-height: 186px;
+    width: 100%; /* This component was designed using a width of 748px */
+  }
+
+
+  .Comp2 .state4_elBillingDropdown {
+    position: absolute;
+    margin-top: 0px;
+    width: 156px;
+    margin-left: 455px;
+  }
+  .Comp2 .state4_elBillingDropdown > * { 
+  width: 156px;
+  }
+  
+  .flowRow_Comp2_state4_elBillingDropdown { 
+  }
+  
+
+/* This component has a fixed-size layout */
+  .StatisticsDropDown {
+    min-height: 175px;
+    width: 100%; /* This component was designed using a width of 294px */
+  }
+
+
+  .StatisticsDropDown .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+
+
+  .StatisticsDropDown .elButton {
+    line-height: 27px;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .StatisticsDropDown .elButton > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .StatisticsDropDown .elButton2 {
+    line-height: 27px;
+    margin-top: 8px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .StatisticsDropDown .elButton2 > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .StatisticsDropDown .elButton3 {
+    line-height: 27px;
+    margin-top: 9px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .StatisticsDropDown .elButton3 > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .StatisticsDropDown .elButton4 {
+    line-height: 27px;
+    margin-top: 6px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .StatisticsDropDown .elButton4 > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .StatisticsDropDown .elButton5 {
+    line-height: 27px;
+    margin-top: 7px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .StatisticsDropDown .elButton5 > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+/* This component has a fixed-size layout */
+  .AccountDropDown {
+    min-height: 100px;
+    width: 100%; /* This component was designed using a width of 261px */
+  }
+
+
+  .AccountDropDown .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+
+
+  .AccountDropDown .elAGeneralBtn {
+    line-height: 27px;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .AccountDropDown .elAGeneralBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .AccountDropDown .elContactsBtn {
+    line-height: 27px;
+    margin-top: 4px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .AccountDropDown .elContactsBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+
+  .AccountDropDown .elAFeaturesBtn {
+    line-height: 27px;
+    margin-top: 5px;
+    margin-left: 10.0%;
+    margin-right: 0px;
+    width: calc(90.0% - 0px);
+  }
+  .AccountDropDown .elAFeaturesBtn > * { 
+    width: 100%;
+  height: 27px;
+  }
+  
+
+/* This component has a fixed-size layout */
+  .Comp1 {
+    min-height: 706px;
+    width: 100%; /* This component was designed using a width of 363px */
+  }
+
+
+  .Comp1 .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    height: 100%;
+  }
+
+
+  .Comp1 .elStatisticsBtn {
+    line-height: 34px;
+    margin-top: 8px;
+    margin-left: 15.0%;
+    margin-right: 15.0%;
+    width: calc(70.0% - 0px);
+  }
+  .Comp1 .elStatisticsBtn > * { 
+    width: 100%;
+  height: 34px;
+  }
+  
+
+
+  .Comp1 .elStatisticsDropDown {
+    margin-top: 2px;
+    margin-left: calc(15.0% + 1px);
+    margin-right: 14.9%;
+    width: calc(70.1% - 1px);
+  }
+  .Comp1 .elStatisticsDropDown > * { 
+    width: 100%;
+  }
+  
+
+
+  .Comp1 .elSettingsBtn {
+    line-height: 34px;
+    margin-top: 4px;
+    margin-left: 15.0%;
+    margin-right: 15.0%;
+    width: calc(70.0% - 0px);
+  }
+  .Comp1 .elSettingsBtn > * { 
+    width: 100%;
+  height: 34px;
+  }
+  
+
+
+  .Comp1 .elStatDropDown {
+    margin-top: -1px;
+    margin-left: calc(15.0% + 1px);
+    margin-right: 14.9%;
+    width: calc(70.1% - 1px);
+  }
+  .Comp1 .elStatDropDown > * { 
+    width: 100%;
+  }
+  
+
+
+  .Comp1 .elAccountBtn {
+    line-height: 34px;
+    margin-top: 4px;
+    margin-left: 15.0%;
+    margin-right: 15.0%;
+    width: calc(70.0% - 0px);
+  }
+  .Comp1 .elAccountBtn > * { 
+    width: 100%;
+  height: 34px;
+  }
+  
+
+
+  .Comp1 .elAccountDropDown {
+    margin-top: 0px;
+    margin-left: 15.0%;
+    margin-right: 15.0%;
+    width: calc(70.0% - 0px);
+  }
+  .Comp1 .elAccountDropDown > * { 
+    width: 100%;
+  }
+  
+
+
+  .Comp1 .elBillingBtn {
+    line-height: 34px;
+    margin-top: 4px;
+    margin-left: 15.0%;
+    margin-right: 15.0%;
+    width: calc(70.0% - 0px);
+  }
+  .Comp1 .elBillingBtn > * { 
+    width: 100%;
+  height: 34px;
+  }
+  
+
+
+  .Comp1 .elBillingDropdown {
+    margin-top: 1px;
+    margin-left: 15.0%;
+    margin-right: 15.2%;
+    width: calc(69.8% - -3px);
+  }
+  .Comp1 .elBillingDropdown > * { 
+    width: 100%;
+  }
+  
+
+/* Narrowest size for component's responsive layout */
+  .Comp4 {
+    min-height: 222px;
+  }
+@media (min-width: 568px) {
+  .Comp4 {
+    min-height: 222px;
+  }
+}
+@media (min-width: 768px) {
+  .Comp4 {
+    min-height: 221px;
+  }
+}
+@media (min-width: 1024px) {
+  .Comp4 {
+    min-height: 221px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Comp4 .elDropDowmMenu {
+    margin-top: 24px;
+    width: 725px;
+    margin-left: 0px;
+  }
+  .Comp4 .elDropDowmMenu > * { 
+  width: 725px;
+  }
+  
+@media (min-width: 568px) {
+  .Comp4 .elDropDowmMenu {
+    margin-top: 24px;
+    width: 725px;
+    margin-left: 0px;
+  }
+  .Comp4 .elDropDowmMenu > * { 
+  width: 725px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .Comp4 .elDropDowmMenu {
+    margin-top: 24px;
+    width: 720px;
+    margin-left: 0px;
+  }
+  .Comp4 .elDropDowmMenu > * { 
+  width: 720px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .Comp4 .elDropDowmMenu {
+    margin-top: 24px;
+    width: 720px;
+    margin-left: 0px;
+  }
+  .Comp4 .elDropDowmMenu > * { 
+  width: 720px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Comp4 .elHelpBtn {
+    line-height: 27px;
+    position: absolute;
+    left: 604px;
+    top: 2px;
+    width: 129px;
+    height: 27px;
+  }
+@media (min-width: 568px) {
+  .Comp4 .elHelpBtn {
+    line-height: 27px;
+    left: 604px;
+    top: 2px;
+    width: 129px;
+    height: 27px;
+  }
+}
+@media (min-width: 768px) {
+  .Comp4 .elHelpBtn {
+    line-height: 27px;
+    left: 600px;
+    top: 2px;
+    width: 128px;
+    height: 27px;
+  }
+}
+@media (min-width: 1024px) {
+  .Comp4 .elHelpBtn {
+    line-height: 27px;
+    left: 600px;
+    top: 2px;
+    width: 128px;
+    height: 27px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Comp4 .elBillingBtn {
+    line-height: 27px;
+    position: absolute;
+    left: 454px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+@media (min-width: 568px) {
+  .Comp4 .elBillingBtn {
+    line-height: 27px;
+    left: 454px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+}
+@media (min-width: 768px) {
+  .Comp4 .elBillingBtn {
+    line-height: 27px;
+    left: 451px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+@media (min-width: 1024px) {
+  .Comp4 .elBillingBtn {
+    line-height: 27px;
+    left: 451px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Comp4 .elAccountBtn {
+    line-height: 27px;
+    position: absolute;
+    left: 304px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+@media (min-width: 568px) {
+  .Comp4 .elAccountBtn {
+    line-height: 27px;
+    left: 304px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+}
+@media (min-width: 768px) {
+  .Comp4 .elAccountBtn {
+    line-height: 27px;
+    left: 302px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+@media (min-width: 1024px) {
+  .Comp4 .elAccountBtn {
+    line-height: 27px;
+    left: 302px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Comp4 .elStatBtn {
+    line-height: 27px;
+    position: absolute;
+    left: 0px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+@media (min-width: 568px) {
+  .Comp4 .elStatBtn {
+    line-height: 27px;
+    left: 0px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+}
+@media (min-width: 768px) {
+  .Comp4 .elStatBtn {
+    line-height: 27px;
+    left: 0px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+@media (min-width: 1024px) {
+  .Comp4 .elStatBtn {
+    line-height: 27px;
+    left: 0px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Comp4 .elSettingsButton {
+    line-height: 27px;
+    position: absolute;
+    left: 148px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+@media (min-width: 568px) {
+  .Comp4 .elSettingsButton {
+    line-height: 27px;
+    left: 148px;
+    top: 2px;
+    width: 145px;
+    height: 27px;
+  }
+}
+@media (min-width: 768px) {
+  .Comp4 .elSettingsButton {
+    line-height: 27px;
+    left: 147px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+@media (min-width: 1024px) {
+  .Comp4 .elSettingsButton {
+    line-height: 27px;
+    left: 147px;
+    top: 2px;
+    width: 144px;
+    height: 27px;
+  }
+}
+
+/* This component has a fixed-size layout */
+  .LogoSMTP {
+    min-height: 30px;
+    overflow: hidden;
+    width: 100%; /* This component was designed using a width of 130px */
+  }
+
+
+  .LogoSMTP .elLogo {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 128px;
+    height: 29px;
+  }
+
+/* This component has a fixed-size layout */
+  .MainMenuMobileComponent {
+    min-height: 419px;
+    width: 100%; /* This component was designed using a width of 322px */
+  }
+
+
+  .MainMenuMobileComponent .elComp {
+    margin-top: 40px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .MainMenuMobileComponent .elComp > * { 
+    width: 100%;
+  }
+  
+
+
+  .MainMenuMobileComponent .elIconButton {
+    line-height: 36px;
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    width: 41px;
+    height: 36px;
+  }
+
+/* This component has a fixed-size layout */
+  .MainMenuWebComponent {
+    min-height: 409px;
+    overflow: hidden;
+    width: 100%; /* This component was designed using a width of 811px */
+  }
+
+
+  .MainMenuWebComponent .elComp {
+    position: absolute;
+    right: 0px;
+    top: 16px;
+    width: 750px;
+    height: 30px;
+  }
+
+/* Narrowest size for component's responsive layout */
+  .Notifications {
+    min-height: 66px;
+  }
+@media (min-width: 568px) {
+  .Notifications {
+    min-height: 66px;
+  }
+}
+@media (min-width: 768px) {
+  .Notifications {
+    min-height: 65px;
+  }
+}
+@media (min-width: 1024px) {
+  .Notifications {
+    min-height: 65px;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Notifications .elType {
+    margin-top: 0px;
+    width: 80px;
+    margin-left: 0px;
+  }
+  .Notifications .elType > * { 
+  width: 80px;
+  }
+  
+@media (min-width: 568px) {
+  .Notifications .elType {
+    margin-top: 0px;
+    width: 80px;
+    margin-left: 0px;
+  }
+  .Notifications .elType > * { 
+  width: 80px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .Notifications .elType {
+    margin-top: 0px;
+    width: 80px;
+    margin-left: 0px;
+  }
+  .Notifications .elType > * { 
+  width: 80px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .Notifications .elType {
+    margin-top: 0px;
+    width: 80px;
+    margin-left: 0px;
+  }
+  .Notifications .elType > * { 
+  width: 80px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Notifications .elText {
+    margin-top: 2px;
+    width: 82px;
+    margin-left: 0px;
+  }
+  .Notifications .elText > * { 
+  width: 82px;
+  }
+  
+@media (min-width: 568px) {
+  .Notifications .elText {
+    margin-top: 2px;
+    width: 82px;
+    margin-left: 0px;
+  }
+  .Notifications .elText > * { 
+  width: 82px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .Notifications .elText {
+    margin-top: -22px;
+    width: 82px;
+    margin-left: 90px;
+  }
+  .Notifications .elText > * { 
+  width: 82px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .Notifications .elText {
+    margin-top: -22px;
+    width: 82px;
+    margin-left: 90px;
+  }
+  .Notifications .elText > * { 
+  width: 82px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .Notifications .elNotoficationText {
+    margin-top: -48px;
+    margin-left: 30.0%;
+    margin-right: 0px;
+    width: calc(70.0% - 0px);
+  }
+  .Notifications .elNotoficationText > * { 
+    width: 100%;
+  }
+  
+@media (min-width: 568px) {
+  .Notifications .elNotoficationText {
+    margin-top: -48px;
+    margin-left: 30.0%;
+    margin-right: 0px;
+    width: calc(70.0% - 0px);
+  }
+  .Notifications .elNotoficationText > * { 
+    width: 100%;
+  }
+  
+}
+@media (min-width: 768px) {
+  .Notifications .elNotoficationText {
+    margin-top: -22px;
+    margin-left: calc(12.4% + 36px);
+    margin-right: -36px;
+    width: calc(87.6% - 0px);
+  }
+  .Notifications .elNotoficationText > * { 
+    width: 100%;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .Notifications .elNotoficationText {
+    margin-top: -22px;
+    margin-left: 30.0%;
+    margin-right: 0px;
+    width: calc(70.0% - 0px);
+  }
+  .Notifications .elNotoficationText > * { 
+    width: 100%;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .background > .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+@media (min-width: 568px) {
+  .DashboardScreen > .background > .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .background > .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .background > .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 46px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 174px;
+  }
+  
+@media (min-width: 568px) {
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 46px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 174px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 45px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 174px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 45px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 131px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -163px;
+    width: 265px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 265px;
+  }
+  
+@media (min-width: 568px) {
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -163px;
+    width: 265px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 265px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -162px;
+    width: 264px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 264px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -112px;
+    width: 264px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .DashboardScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 264px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 23px;
+    width: calc(100.0% - 45px);
+  }
+  .DashboardScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+@media (min-width: 568px) {
+  .DashboardScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 23px;
+    width: calc(100.0% - 45px);
+  }
+  .DashboardScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 22px;
+    width: calc(100.0% - 45px);
+  }
+  .DashboardScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 22px;
+    width: calc(100.0% - 45px);
+  }
+  .DashboardScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 251px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .DashboardScreen > .layoutFlow > .elTextBlock > * { 
+  width: 251px;
+  }
+  
+@media (min-width: 568px) {
+  .DashboardScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 251px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .DashboardScreen > .layoutFlow > .elTextBlock > * { 
+  width: 251px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 249px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .DashboardScreen > .layoutFlow > .elTextBlock > * { 
+  width: 249px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 249px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .DashboardScreen > .layoutFlow > .elTextBlock > * { 
+  width: 249px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .layoutFlow > .elComp {
+    margin-top: 9px;
+    width: 299px;
+    margin-left: calc(50.0% - 150px);
+  }
+  .DashboardScreen > .layoutFlow > .elComp > * { 
+  width: 299px;
+  }
+  
+  .DashboardScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+@media (min-width: 568px) {
+  .DashboardScreen > .layoutFlow > .elComp {
+    margin-top: 9px;
+    width: 299px;
+    margin-left: calc(50.0% - 150px);
+  }
+  .DashboardScreen > .layoutFlow > .elComp > * { 
+  width: 299px;
+  }
+  
+  .DashboardScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .layoutFlow > .elComp {
+    margin-top: 9px;
+    width: 298px;
+    margin-left: calc(50.0% - 149px);
+  }
+  .DashboardScreen > .layoutFlow > .elComp > * { 
+  width: 298px;
+  }
+  
+  .DashboardScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .layoutFlow > .elComp {
+    margin-top: -90px;
+    width: 298px;
+    margin-left: calc(20.3% - 149px);
+  }
+  .DashboardScreen > .layoutFlow > .elComp > * { 
+  width: 298px;
+  }
+  
+  .DashboardScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+}
+
+  .DashboardScreen .elNotificationList li {
+    margin-bottom: 9px;
+  }
+
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .layoutFlow > .elNotificationList {
+    margin-top: 45px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .DashboardScreen > .layoutFlow > .elNotificationList > * { 
+    width: 100%;
+  }
+  
+@media (min-width: 568px) {
+  .DashboardScreen > .layoutFlow > .elNotificationList {
+    margin-top: 45px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .DashboardScreen > .layoutFlow > .elNotificationList > * { 
+    width: 100%;
+  }
+  
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .layoutFlow > .elNotificationList {
+    margin-top: 22px;
+    margin-left: 0px;
+    margin-right: 384px;
+    width: calc(100.0% - 384px);
+  }
+  .DashboardScreen > .layoutFlow > .elNotificationList > * { 
+    width: 100%;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .layoutFlow > .elNotificationList {
+    margin-top: 66px;
+    margin-left: 0px;
+    margin-right: 515px;
+    width: calc(100.0% - 515px);
+  }
+  .DashboardScreen > .layoutFlow > .elNotificationList > * { 
+    width: 100%;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 346px;
+  }
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper .containerMinHeight {
+    min-height: 346px;
+  }
+
+@media (min-width: 568px) {
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 346px;
+  }
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper .containerMinHeight {
+    min-height: 346px;
+  }
+
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 344px;
+  }
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper .containerMinHeight {
+    min-height: 346px;
+  }
+
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper {
+    left: -3px;
+    right: 0px;
+    top: 0px;
+    width: calc(100% - -3px + 0px);
+    height: 344px;
+  }
+  .DashboardScreen > .screenFgContainer > .foreground > .elMainMenuSwapper .containerMinHeight {
+    min-height: 346px;
+  }
+
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .DashboardScreen > .screenFgContainer > .foreground > .elLogo {
+    position: absolute;
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+@media (min-width: 568px) {
+  .DashboardScreen > .screenFgContainer > .foreground > .elLogo {
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+}
+@media (min-width: 768px) {
+  .DashboardScreen > .screenFgContainer > .foreground > .elLogo {
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+}
+@media (min-width: 1024px) {
+  .DashboardScreen > .screenFgContainer > .foreground > .elLogo {
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+}
+
+/* This component has a fixed-size layout */
+  .Comp3 {
+    min-height: 46px;
+    width: 100%; /* This component was designed using a width of 299px */
+  }
+
+
+  .Comp3 .elIconButton3 {
+    line-height: 36px;
+    margin-top: 3px;
+    width: 41px;
+    margin-left: 0px;
+  }
+  .Comp3 .elIconButton3 > * { 
+  width: 41px;
+  height: 36px;
+  }
+  
+
+
+  .Comp3 .elTextBlock2 {
+    margin-top: -25px;
+    width: 93px;
+    margin-left: 45px;
+  }
+  .Comp3 .elTextBlock2 > * { 
+  width: 93px;
+  }
+  
+
+
+  .Comp3 .elIconButton2 {
+    line-height: 42px;
+    margin-top: -34px;
+    width: 43px;
+    margin-left: 156px;
+  }
+  .Comp3 .elIconButton2 > * { 
+  width: 43px;
+  height: 42px;
+  }
+  
+
+
+  .Comp3 .elTextBlock3 {
+    margin-top: -39px;
+    width: 93px;
+    margin-left: 204px;
+  }
+  .Comp3 .elTextBlock3 > * { 
+  width: 93px;
+  }
+  
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .background > .elBackground {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+@media (min-width: 568px) {
+  .LogonScreen > .background > .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .LogonScreen > .background > .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .background > .elBackground {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 46px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 175px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 46px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 175px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 45px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 174px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage {
+    margin-top: 45px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: calc(100.0% - 0px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elPanohomepage > * { 
+    width: 100%;
+  height: 131px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -163px;
+    width: 265px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 265px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -163px;
+    width: 265px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 265px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -162px;
+    width: 264px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 264px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP {
+    margin-top: -112px;
+    width: 264px;
+    margin-left: calc(50.0% - 132px);
+  }
+  .LogonScreen > .layoutFlow > .elDashboardLogin_elLogowhiteSMTP > * { 
+  width: 264px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 23px;
+    width: calc(100.0% - 45px);
+  }
+  .LogonScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 23px;
+    width: calc(100.0% - 45px);
+  }
+  .LogonScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 22px;
+    width: calc(100.0% - 45px);
+  }
+  .LogonScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elRectangle {
+    margin-top: 4px;
+    margin-left: 22px;
+    margin-right: 22px;
+    width: calc(100.0% - 45px);
+  }
+  .LogonScreen > .layoutFlow > .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 251px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .LogonScreen > .layoutFlow > .elTextBlock > * { 
+  width: 251px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 251px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .LogonScreen > .layoutFlow > .elTextBlock > * { 
+  width: 251px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 249px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .LogonScreen > .layoutFlow > .elTextBlock > * { 
+  width: 249px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elTextBlock {
+    margin-top: 4px;
+    width: 249px;
+    margin-left: calc(50.0% - 125px);
+  }
+  .LogonScreen > .layoutFlow > .elTextBlock > * { 
+  width: 249px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elComp {
+    margin-top: 9px;
+    width: 299px;
+    margin-left: calc(50.0% - 150px);
+  }
+  .LogonScreen > .layoutFlow > .elComp > * { 
+  width: 299px;
+  }
+  
+  .LogonScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elComp {
+    margin-top: 9px;
+    width: 299px;
+    margin-left: calc(50.0% - 150px);
+  }
+  .LogonScreen > .layoutFlow > .elComp > * { 
+  width: 299px;
+  }
+  
+  .LogonScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elComp {
+    margin-top: 9px;
+    width: 298px;
+    margin-left: calc(50.0% - 149px);
+  }
+  .LogonScreen > .layoutFlow > .elComp > * { 
+  width: 298px;
+  }
+  
+  .LogonScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elComp {
+    margin-top: -90px;
+    width: 298px;
+    margin-left: calc(20.4% - 149px);
+  }
+  .LogonScreen > .layoutFlow > .elComp > * { 
+  width: 298px;
+  }
+  
+  .LogonScreen > .layoutFlow > .elComp .containerMinHeight {
+    min-height: 46px;
+  }
+
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elLogin {
+    margin-top: 56px;
+    width: 226px;
+    margin-left: calc(50.0% - 113px);
+  }
+  .LogonScreen > .layoutFlow > .elLogin > * { 
+  width: 226px;
+  height: 34px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elLogin {
+    margin-top: 22px;
+    width: 226px;
+    margin-left: calc(50.0% - 113px);
+  }
+  .LogonScreen > .layoutFlow > .elLogin > * { 
+  width: 226px;
+  height: 34px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elLogin {
+    margin-top: 169px;
+    width: 225px;
+    margin-left: calc(50.0% - 112px);
+  }
+  .LogonScreen > .layoutFlow > .elLogin > * { 
+  width: 225px;
+  height: 34px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elLogin {
+    margin-top: 168px;
+    width: 225px;
+    margin-left: calc(50.0% - 112px);
+  }
+  .LogonScreen > .layoutFlow > .elLogin > * { 
+  width: 225px;
+  height: 34px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elPass {
+    margin-top: 16px;
+    width: 226px;
+    margin-left: calc(50.0% - 113px);
+  }
+  .LogonScreen > .layoutFlow > .elPass > * { 
+  width: 226px;
+  height: 34px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elPass {
+    margin-top: 16px;
+    width: 226px;
+    margin-left: calc(50.0% - 113px);
+  }
+  .LogonScreen > .layoutFlow > .elPass > * { 
+  width: 226px;
+  height: 34px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elPass {
+    margin-top: 16px;
+    width: 225px;
+    margin-left: calc(50.0% - 112px);
+  }
+  .LogonScreen > .layoutFlow > .elPass > * { 
+  width: 225px;
+  height: 34px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elPass {
+    margin-top: 16px;
+    width: 225px;
+    margin-left: calc(50.0% - 112px);
+  }
+  .LogonScreen > .layoutFlow > .elPass > * { 
+  width: 225px;
+  height: 34px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .layoutFlow > .elButton {
+    line-height: 35px;
+    margin-top: 19px;
+    width: 166px;
+    margin-left: calc(50.0% - 83px);
+  }
+  .LogonScreen > .layoutFlow > .elButton > * { 
+  width: 166px;
+  height: 35px;
+  }
+  
+@media (min-width: 568px) {
+  .LogonScreen > .layoutFlow > .elButton {
+    line-height: 35px;
+    margin-top: 19px;
+    width: 166px;
+    margin-left: calc(50.0% - 83px);
+  }
+  .LogonScreen > .layoutFlow > .elButton > * { 
+  width: 166px;
+  height: 35px;
+  }
+  
+}
+@media (min-width: 768px) {
+  .LogonScreen > .layoutFlow > .elButton {
+    line-height: 35px;
+    margin-top: 18px;
+    width: 165px;
+    margin-left: calc(50.0% - 83px);
+  }
+  .LogonScreen > .layoutFlow > .elButton > * { 
+  width: 165px;
+  height: 35px;
+  }
+  
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .layoutFlow > .elButton {
+    line-height: 35px;
+    margin-top: 18px;
+    width: 165px;
+    margin-left: calc(50.0% - 83px);
+  }
+  .LogonScreen > .layoutFlow > .elButton > * { 
+  width: 165px;
+  height: 35px;
+  }
+  
+}
+
+
+/* Narrowest size for this element's responsive layout */
+  .LogonScreen > .screenFgContainer > .foreground > .elLogo {
+    position: absolute;
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+@media (min-width: 568px) {
+  .LogonScreen > .screenFgContainer > .foreground > .elLogo {
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+}
+@media (min-width: 768px) {
+  .LogonScreen > .screenFgContainer > .foreground > .elLogo {
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+}
+@media (min-width: 1024px) {
+  .LogonScreen > .screenFgContainer > .foreground > .elLogo {
+    left: 20px;
+    top: 7px;
+    width: 128px;
+    height: 29px;
+  }
+}
+
+/* This component has a fixed-size layout */
+  .DashboardLogin {
+    min-height: 168px;
+    min-width: 334px;
+     /* This component has a fixed size */
+  }
+
+
+  .DashboardLogin .elPanohomepage {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: -2px;
+    width: calc(100.0% - -2px);
+  }
+  .DashboardLogin .elPanohomepage > * { 
+    width: 100%;
+  height: 174px;
+  }
+  
+
+
+  .DashboardLogin .elLogowhiteSMTP {
+    margin-top: -163px;
+    width: 265px;
+    margin-left: calc(50.1% - 132px);
+  }
+  .DashboardLogin .elLogowhiteSMTP > * { 
+  width: 265px;
+  height: 64px;
+  }
+  
+
+
+  .DashboardLogin .elRectangle {
+    margin-top: 9px;
+    margin-left: 22px;
+    margin-right: 23px;
+    width: calc(100.0% - 45px);
+  }
+  .DashboardLogin .elRectangle > * { 
+    width: 100%;
+  height: 1px;
+  }
+  
+
+
+  .DashboardLogin .elTextBlock {
+    margin-top: 9px;
+    width: 254px;
+    margin-left: calc(50.0% - 127px);
+  }
+  .DashboardLogin .elTextBlock > * { 
+  width: 254px;
+  }
+  
+
+
+  .DashboardLogin .elSwapper {
+    margin-top: 6px;
+    width: 293px;
+    margin-left: calc(50.0% - 146px);
+  }
+  .DashboardLogin .elSwapper > * { 
+  width: 293px;
+  }
+  
+

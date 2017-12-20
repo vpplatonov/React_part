@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const NavBar = (props) => (
 
   <Menu stackable inverted>
-    <img src='/logo.png' alt=''/>
     <Menu.Item as={Link} to='/'>
       Dashboard
     </Menu.Item>

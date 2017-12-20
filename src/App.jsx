@@ -9,6 +9,8 @@ import UserForm from './components/Form';
 import Logout from './components/Logout';
 import UserStatus from './components/UserStatus';
 import DashboardComponent from './containers/Dashboard/components/';
+import DashboardLogin from './components/DashboardLogin/DashboardLogin';
+import LogoSMTP from './components/LogoSMTP';
 import { Redirect } from 'react-router-dom';
 import {Helmet} from 'react-helmet'
 
@@ -50,12 +52,17 @@ class App extends Component {
   render() {
     return (
       <div>
+          <LogoSMTP/>
           {this.state.isAuthenticated &&
           <NavBar
               title={this.state.title}
               isAuthenticated={this.state.isAuthenticated}
               isAdmin={this.state.isAdmin}
           />
+          }
+
+          {!this.state.isAuthenticated &&
+            <DashboardLogin/>
           }
           <Grid columns={3}>
             <Grid.Row>
@@ -75,44 +82,52 @@ class App extends Component {
                     : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
                 )}/>
 
-                { this.state.isAuthenticated &&
-                  <Route exact path='/users' render={() => (
-                      <div>
+                <Route exact path='/users' render={(props) => (
+                    this.state.isAuthenticated
+                    ? <div>
                           <UsersList users={this.state.users} title={'All Users'}/>
                       </div>
-                  )}/>
-                }
-                { this.state.isAuthenticated &&
-                  <Route exact path='/senders' render={() => (
-                      <div>
+                    : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+                )}/>
+
+
+                <Route exact path='/senders' render={(props) => (
+                    this.state.isAuthenticated
+                      ? <div>
                           <UsersList users={this.state.senders} title={'Senders'}/>
-                      </div>
-                  )}/>
-                }
+                        </div>
+                      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+                )}/>
+
                 <Route exact path='/about' component={About}/>
-                <Route exact path='/register' render={() => (
-                  <UserForm
-                    formType={'register'}
-                    isAdmin={this.state.isAdmin}
-                    isAuthenticated={this.state.isAuthenticated}
-                    loginUser={this.loginUser.bind(this)}
-                  />
+                <Route exact path='/register' render={(props) => (
+                  this.state.isAuthenticated
+                      ? <UserForm
+                        formType={'register'}
+                        isAdmin={this.state.isAdmin}
+                        isAuthenticated={this.state.isAuthenticated}
+                        loginUser={this.loginUser.bind(this)}
+                      />
+                      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
                 )} />
-                <Route exact path='/login' render={() => (
-                  <UserForm
-                    formType={'login'}
-                    isAuthenticated={this.state.isAuthenticated}
-                    isAdmin={this.state.isAdmin}
-                    loginUser={this.loginUser.bind(this)}
-                  />
+                <Route exact path='/login' render={(props) => (
+                  this.state.isAuthenticated
+                      ? <Redirect to={{pathname: '/'}} />
+                      : <UserForm
+                        formType={'login'}
+                        isAuthenticated={this.state.isAuthenticated}
+                        isAdmin={this.state.isAdmin}
+                        loginUser={this.loginUser.bind(this)}
+                        />
+
                 )} />
-                <Route exact path='/logout' render={() => (
+                <Route exact path='/logout' render={(props) => (
                   <Logout
                     logoutUser={this.logoutUser.bind(this)}
                     isAuthenticated={this.state.isAuthenticated}
                   />
                 )} />
-                <Route exact path='/status' render={() => (
+                <Route exact path='/status' render={(props) => (
                   <UserStatus
                     isAuthenticated={this.state.isAuthenticated}
                   />
