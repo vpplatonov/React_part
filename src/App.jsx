@@ -119,22 +119,32 @@ class App extends Component {
                     : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
                 )}/>
 
-                <Route exact path='/users' render={(props) => (
-                    this.state.isAuthenticated
-                    ? <div>
-                          <UsersList users={this.state.users} title={'All Users'}/>
-                      </div>
-                    : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
-                )}/>
+                <Route exact path='/users' render={(props) => {
+                    const senderFiledsLabel = ['User ID', 'Email', 'User name', 'Created Date'];
+                    const userFileds = ['id', 'email', 'username', 'created_at'];
+
+                    return (
+                        this.state.isAuthenticated
+                            ? <div>
+                                <UsersList users={this.state.users} title={'All Users'} tableHeader={senderFiledsLabel} tableFields={userFileds} />
+                            </div>
+                            : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
+                    )
+                }}/>
 
 
-                <Route exact path='/senders' render={(props) => (
-                    this.state.isAuthenticated
-                      ? <div>
-                          <UsersList users={this.state.senders} title={'Senders'}/>
-                        </div>
-                      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
-                )}/>
+                <Route exact path='/senders' render={(props) => {
+                    const senderFiledsLabel = ['Sender ID', 'Email', 'User name', 'Created Date', 'Status', 'IP pool ID'];
+                    const senderFileds = ['id', 'login',  'label', 'created_at', 'status', 'ip_pool_id'];
+
+                    return (
+                        this.state.isAuthenticated
+                            ? <div>
+                                <UsersList users={this.state.senders} title={'Senders'} tableHeader={senderFiledsLabel} tableFields={senderFileds} rowsPerPage={10} />
+                            </div>
+                            : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
+                    )
+                }}/>
 
                 <Route exact path='/about' component={About}/>
                 <Route exact path='/register' render={(props) => (

@@ -16,7 +16,6 @@ class NavBar extends Component {
                 text: 'Dashboard',
                 description: 'Dashboard',
                 icon: '',
-                children: {},
                 visible: this.props.isAuthenticated
             },
             statistics: {

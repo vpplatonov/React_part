@@ -11,7 +11,7 @@ export default class DesktopMenu extends Component {
 
     subMenuRender(subMenuObj) {
         return (
-        <Dropdown text={subMenuObj.text} className='link item'>
+        <Dropdown text={subMenuObj.text} className='link item' key={subMenuObj.text}>
             <Dropdown.Menu>
                {
                     Object.keys(subMenuObj.children).map((child) => {
@@ -25,47 +25,33 @@ export default class DesktopMenu extends Component {
         )
     }
 
+    mainMenuItemRender(subMenuObj) {
+        if ('children' in subMenuObj ) {
+            return (this.subMenuRender(subMenuObj));
+        }
+        else {
+            return (
+                <Menu.Item as={Link} to={subMenuObj.to} key={subMenuObj.text}>
+                    {subMenuObj.text}
+                </Menu.Item>
+            )
+        }
+    }
+
     render() {
         const {menuLinks} = this.props;
 
         return (
             <Menu borderless className={"noBorderBoxShadow"}>
                 <Menu.Menu position='right'>
-                    {menuLinks.dashboard.visible &&
-                      <Menu.Item as={Link} to={menuLinks.dashboard.to}>
-                          {menuLinks.dashboard.text}
-                      </Menu.Item>
+                    {
+                        Object.keys(menuLinks).map((mItem) => {
+                            return (
+                                menuLinks[mItem].visible && this.mainMenuItemRender(menuLinks[mItem])
+                            )
+                        })
                     }
 
-                    {menuLinks.statistics.visible  &&
-                        this.subMenuRender(menuLinks.statistics)
-                    }
-
-                    {menuLinks.settings.visible &&
-                        this.subMenuRender(menuLinks.settings)
-                    }
-
-                    {menuLinks.billing.visible &&
-                        this.subMenuRender(menuLinks.billing)
-                    }
-                    {menuLinks.account.visible  &&
-                        this.subMenuRender(menuLinks.account)
-                    }
-
-                    {menuLinks.admin.visible &&
-                        this.subMenuRender(menuLinks.admin)
-                    }
-
-                    {menuLinks.login.visible &&
-                        <Menu.Item as={Link} to={menuLinks.login.to}>
-                             {menuLinks.login.text}
-                        </Menu.Item>
-                    }
-                    {menuLinks.logout.visible &&
-                        <Menu.Item as={Link} to={menuLinks.logout.to}>
-                            {menuLinks.logout.text}
-                        </Menu.Item>
-                    }
                 </Menu.Menu>
             </Menu>
         )
