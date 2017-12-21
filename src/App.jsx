@@ -18,6 +18,7 @@ import LogoSMTP from './components/LogoSMTP';
 import current_plan from './images/current_plan.png';
 import top_bouncing_domain from './images/top_bouncing_domain.png';
 import top_engaging_companies from './images/top_engaging_companies.png';
+import selected_time_period from './images/selected_time_period.png';
 
 
 class App extends Component {
@@ -110,8 +111,9 @@ class App extends Component {
 				        </Helmet>
                         <DashboardComponent posts={[
                             {title: 'Current plan', body: 'Empty', id: 3, userId: 1, src: current_plan},
-                            {title: 'Top engaging companies', body: 'Empty', id: 1, userId: 1, src: top_engaging_companies},
-                            {title: 'Top bouncing domain', body: 'Empty', id: 2, userId: 1, src: top_bouncing_domain},
+                            {title: 'Top engaging companies', body: 'Empty', id: 2, userId: 1, src: top_engaging_companies},
+                            {title: 'Top bouncing domain', body: 'Empty', id: 3, userId: 1, src: top_bouncing_domain},
+                            {title: 'Status for selected time period', body: 'Empty', id: 4, userId: 1, src: selected_time_period},
                             ]} postsLoaded={true} />
                       </div>
                     : <Redirect to={{pathname: '/login', state: {from: props.location}}} />

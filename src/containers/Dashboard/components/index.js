@@ -6,7 +6,7 @@ import DashboardCardComponent from './DashboardCardComponent'
 
 export default class DashboardComponent extends Component {
 	static propTypes = {
-		posts: PropTypes.object,
+		posts: PropTypes.array,
 		postsLoaded: PropTypes.bool,
 		postsLoading: PropTypes.bool,
 		count: PropTypes.number
