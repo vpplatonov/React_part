@@ -7,36 +7,20 @@ export default class DashboardCardComponent extends Component {
 		title: PropTypes.string,
 		body: PropTypes.string,
 		userId: PropTypes.number,
-		id: PropTypes.number
-	}
+		id: PropTypes.number,
+		src: PropTypes.string,
+	};
 
 	render () {
-		const {title, body, id} = this.props
 		return (
 			<Card raised>
-				<Image alt="Dummy image" src='/dummy.png' />
+				<Image alt={this.props.title} src={this.props.src}/>
 				<Card.Content>
 					<Card.Header>
-						{title}
+						{this.props.title}
 					</Card.Header>
 					<Card.Meta>
-						<span className="date">
-							Post `id` is {id}
-						</span>
 					</Card.Meta>
-					<Card.Description>
-						{body}
-					</Card.Description>
-				</Card.Content>
-				<Card.Content extra>
-					<div className="ui two buttons">
-						<Button basic color="green" disabled>
-							Approve
-						</Button>
-						<Button basic color="red" disabled>
-							Decline
-						</Button>
-					</div>
 				</Card.Content>
 			</Card>
 		)

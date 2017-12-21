@@ -15,6 +15,10 @@ import DashboardComponent from './containers/Dashboard/components/';
 import DashboardLogin from './components/DashboardLogin/DashboardLogin';
 import LogoSMTP from './components/LogoSMTP';
 
+import current_plan from './images/current_plan.png';
+import top_bouncing_domain from './images/top_bouncing_domain.png';
+import top_engaging_companies from './images/top_engaging_companies.png';
+
 
 class App extends Component {
   constructor() {
@@ -28,6 +32,8 @@ class App extends Component {
     }
   }
   componentDidMount() {
+    this.windowDidResize();
+    window.addEventListener('resize', this.windowDidResize);
     this.getUsers();
   }
   getUsers() {
@@ -51,7 +57,23 @@ class App extends Component {
     this.getSenders();
   }
 
+  windowDidResize = () => {
+    let w = window.innerWidth;
+    let formatId;
+    if (w < 576) formatId = 'narrow-phone';
+    else if (w < 768) formatId = 'wide-phone';
+    else if (w < 1024) formatId = 'narrow-tablet';
+    else formatId = 'wide-tablet';
+    if (formatId !== this.state.screenFormatId) {
+      this.setState({screenFormatId: formatId});
+    }
+  };
+
   render() {
+    let deviceInfo = {
+        screenFormatId: this.state.screenFormatId,
+    };
+
     return (
       <div>
           <LogoSMTP/>
@@ -61,6 +83,7 @@ class App extends Component {
                   title={this.state.title}
                   isAuthenticated={this.state.isAuthenticated}
                   isAdmin={this.state.isAdmin}
+                  deviceInfo={deviceInfo}
               />
               <Divider hidden/>
           </div>
@@ -85,7 +108,11 @@ class App extends Component {
                         <Helmet>
 					        <title>Dashboard</title>
 				        </Helmet>
-                        <DashboardComponent posts={[{title: 'Dummy', body: 'Empty', id: 1, userId: 1}]} postsLoaded={true} />
+                        <DashboardComponent posts={[
+                            {title: 'Current plan', body: 'Empty', id: 3, userId: 1, src: current_plan},
+                            {title: 'Top engaging companies', body: 'Empty', id: 1, userId: 1, src: top_engaging_companies},
+                            {title: 'Top bouncing domain', body: 'Empty', id: 2, userId: 1, src: top_bouncing_domain},
+                            ]} postsLoaded={true} />
                       </div>
                     : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
                 )}/>

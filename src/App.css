@@ -7,6 +7,11 @@
   background-color: #f7f7f7;
 }
 
+.ui.menu.noBorderBoxShadow {
+  border: none;
+  box-shadow: none;
+}
+
 .App .baseFont * { /* Base font style override for UI framework components */
   font-size: 15.1px;
 }
@@ -1299,7 +1304,6 @@
 
 /* This component has a fixed-size layout */
   .MainMenuMobileComponent {
-    min-height: 419px;
     width: 100%; /* This component was designed using a width of 322px */
   }
 

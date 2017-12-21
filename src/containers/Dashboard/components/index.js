@@ -20,7 +20,7 @@ export default class DashboardComponent extends Component {
 
 	render () {
 		// {count, postsLoading}
-		const {posts, postsLoaded} = this.props
+		const {posts, postsLoaded} = this.props;
 
 		return (
 			<Grid columns={1}>
