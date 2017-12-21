@@ -131,7 +131,7 @@ class UserForm extends Component {
       }
 
       return (
-          <div>
+          <div className="loginForm">
               <h1>{this.props.formType}</h1>
               <Form onSubmit={(event) => this.handleUserFormSubmit(event)}>
                   {this.props.formType === 'register' &&

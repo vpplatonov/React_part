@@ -32,10 +32,16 @@ const UsersList = (props) => {
                                             <Table.Cell key={prop}>{user[prop]}</Table.Cell>
                                         )
                                     }
+                                    else {
+                                        return null;
+                                    }
                                 })
                             }
                         </Table.Row>
                     )
+                }
+                else {
+                    return null;
                 }
             })
           }
@@ -55,6 +61,9 @@ const UsersList = (props) => {
                                       return (
                                           <Menu.Item as='a' key={i}>{i+1}</Menu.Item>
                                       )
+                                  }
+                                  else {
+                                      return null;
                                   }
                               })
                           }
