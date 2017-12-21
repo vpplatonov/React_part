@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import MainMenuMobileComponent from './MainMenuMobileComponent';
 

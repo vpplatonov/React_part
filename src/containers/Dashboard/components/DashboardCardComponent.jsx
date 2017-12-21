@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Card, Image, Button} from 'semantic-ui-react'
+import {Card, Image} from 'semantic-ui-react'
 
 export default class DashboardCardComponent extends Component {
 	static propTypes = {
