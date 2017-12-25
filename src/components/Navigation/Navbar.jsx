@@ -22,14 +22,14 @@ class NavBar extends Component {
                 to: '/statistics',
                 text: 'Statistics',
                 description: 'Statistics',
-                icon: '',
+                icon: 'bar chart',
                 visible: this.props.isAuthenticated,
                 children: {
                     overview: {
                         to: '/statistics/overview',
                         text: 'Overview',
                         description: 'overview',
-                        icon: ''
+                        icon: 'folder'
                     },
                     emailqueue: {
                         to: '/statistics/emailqueue',
@@ -41,19 +41,19 @@ class NavBar extends Component {
                         to: '/statistics/reporting',
                         text: 'Reporting',
                         description: 'Reporting',
-                        icon: ''
+                        icon: 'file text'
                     },
                     deliverability: {
                         to: '/statistics/deliverability',
                         text: 'Deliverability',
                         description: 'Deliverability',
-                        icon: ''
+                        icon: 'mail outline'
                     },
                     bouncesblocks: {
                         to: '/statistics/bouncesblocks',
                         text: 'Bounces & Blocks',
                         description: 'Bounces & Blocks',
-                        icon: ''
+                        icon: 'inbox'
                     },
                 }
             },
@@ -61,38 +61,38 @@ class NavBar extends Component {
                 to: '/settings',
                 text: 'Settings',
                 description: 'My Settings',
-                icon: '',
+                icon: 'setting',
                 visible: this.props.isAuthenticated,
                 children: {
                     general: {
                         to: '/settings/general',
                         text: 'General',
                         description: 'General',
-                        icon: ''
+                        icon: 'settings'
                     },
                     senders: {
                         to: '/senders',
                         text: 'Senders',
                         description: 'My senders',
-                        icon: ''
+                        icon: 'object group'
                     },
                     api: {
                         to: '/settings/api',
                         text: 'API',
                         description: 'API',
-                        icon: ''
+                        icon: 'lightning'
                     },
-                    notifications: {
+                    dedicatedIP: {
                         to: '/settings/dedip',
                         text: 'Dedicated IP',
                         description: 'dedicated ip',
-                        icon: ''
+                        icon: 'flag checkered'
                     },
-                    dedicatedIP: {
+                    notifications: {
                         to: '/settings/notifications',
                         text: 'Notifications',
                         description: 'notifications',
-                        icon: ''
+                        icon: 'bell'
                     }
                 }
             },
@@ -105,21 +105,21 @@ class NavBar extends Component {
                 children: {
                     general: {
                         to: '/accounts/general',
-                        text: 'Dedicated IP',
-                        description: 'dedicated ip',
-                        icon: ''
+                        text: 'General',
+                        description: 'general',
+                        icon: 'globe'
                     },
                     contacts: {
                         to: '/accounts/contacts',
                         text: 'Contacts',
                         description: 'Contacts',
-                        icon: ''
+                        icon: 'chain'
                     },
                     features: {
                         to: '/accounts/features',
                         text: 'Account-wide features',
                         description: 'Account-wide features',
-                        icon: ''
+                        icon: 'wrench'
                     },
                 }
             },
@@ -140,7 +140,7 @@ class NavBar extends Component {
                         to: '/billing/invoices',
                         text: 'Invoices',
                         description: 'Invoices',
-                        icon: ''
+                        icon: 'credit card alternative'
                     },
                 }
             },
@@ -161,13 +161,13 @@ class NavBar extends Component {
                         to: '/register',
                         text: 'Register',
                         description: 'register',
-                        icon: 'register',
+                        icon: 'add user',
                     },
                     status: {
                         to: '/status',
                         text: 'User status',
                         description: 'status',
-                        icon: 'status',
+                        icon: 'user circle',
                     }
                 }
             },
@@ -182,7 +182,7 @@ class NavBar extends Component {
                 to: '/logout',
                 text: 'Logout',
                 description: 'Logout',
-                icon: 'logout',
+                icon: 'sign out',
                 visible: this.props.isAuthenticated
             }
         };
@@ -193,6 +193,9 @@ class NavBar extends Component {
                 menuLinks={menuLinks}
                 isAuthenticated={this.props.isAuthenticated}
                 isAdmin={this.props.isAdmin}
+                sidebarOpened={this.props.sidebarOpened}
+                closeSidebar={this.props.closeSidebar}
+                sideBarPushable={this.props.sideBarPushable}
             />
         );
         if (this.props.deviceInfo.screenFormatId === 'wide-tablet') {

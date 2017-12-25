@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import { Grid, Divider } from 'semantic-ui-react';
+import { Sidebar, Dimmer, Segment, Grid, Divider } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
+import DashboardCardComponent from './containers/Dashboard/components/DashboardCardComponent';
 
 import UsersList from './components/UsersList';
 import About from './components/About';
@@ -14,6 +16,7 @@ import UserStatus from './components/UserStatus';
 import DashboardComponent from './containers/Dashboard/components/';
 import DashboardLogin from './components/DashboardLogin/DashboardLogin';
 import LogoSMTP from './components/LogoSMTP';
+import btn_icon_141863 from './components/Navigation/btn_icon_141863.png';
 
 import current_plan from './images/current_plan.png';
 import top_bouncing_domain from './images/top_bouncing_domain.png';
@@ -29,7 +32,8 @@ class App extends Component {
       senders: [],
       title: 'TestDriven.io',
       isAuthenticated: false,
-      isAdmin: false
+      isAdmin: false,
+      sidebarOpened: false
     }
   }
   componentDidMount() {
@@ -38,18 +42,18 @@ class App extends Component {
     this.getUsers();
   }
   getUsers() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/users`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
         .then((res) => { this.setState({ users: res.data.data.users }); })
         .catch((err) => { console.log(err); })
   }
   getSenders() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/senders`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/senders`)
         .then((res) => { this.setState({ senders: res.data.data.senders }); })
         .catch((err) => { console.log(err); })
   }
   logoutUser() {
     window.localStorage.clear();
-    this.setState({ isAuthenticated: false, isAdmin: false});
+    this.setState({ isAuthenticated: false, isAdmin: false, sidebarOpened: false});
   }
   loginUser(token, is_admin = false) {
     window.localStorage.setItem('authToken', token);
@@ -69,25 +73,63 @@ class App extends Component {
       this.setState({screenFormatId: formatId});
     }
   };
+  onClick_elIconButton = (ev) => {
+      this.setState({sidebarOpened: !this.state.sidebarOpened});
+  };
+
+  closeSidebar = (ev) => {
+      this.setState({sidebarOpened: false});
+  };
 
   render() {
     let deviceInfo = {
         screenFormatId: this.state.screenFormatId,
     };
 
+    // const dimmerProps = {
+    //     //  Dimmed: true,
+    //     active: this.state.isAuthenticated && this.state.sidebarOpened,
+    //     page: true,
+    //     onClick: this.closeSidebar
+    // };
+
+    const style_iconButton = {
+        display: 'block',
+        backgroundImage: 'url('+btn_icon_141863+')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '89.562%',
+        backgroundPosition: '0% 50%',
+        cursor: 'pointer',
+    };
+
+    const sideBarPushable = true;
+
+
     return (
       <div>
-          <LogoSMTP/>
+        <LogoSMTP/>
+        {this.state.isAuthenticated && this.state.screenFormatId !== 'wide-tablet' &&
+          <div className="MainMenuMobileComponent">
+              <div className="foreground">
+                  <div className='actionFont elIconButton' style={style_iconButton}
+                       onClick={this.onClick_elIconButton}/>
+              </div>
+          </div>
+        }
+        <Sidebar.Pushable as={Segment}>
           {this.state.isAuthenticated &&
-          <div>
+            <div>
               <NavBar
                   title={this.state.title}
                   isAuthenticated={this.state.isAuthenticated}
                   isAdmin={this.state.isAdmin}
                   deviceInfo={deviceInfo}
+                  sidebarOpened={this.state.sidebarOpened}
+                  closeSidebar={this.closeSidebar}
+                  sideBarPushable={sideBarPushable}
               />
               <Divider hidden/>
-          </div>
+            </div>
           }
 
           {!this.state.isAuthenticated &&
@@ -96,6 +138,11 @@ class App extends Component {
                 <Divider hidden/>
             </div>
           }
+          <Sidebar.Pusher>
+          {/*<Dimmer {...dimmerProps}/>*/}
+          {/*<Dimmer.Dimmable as={Segment} blurring dimmed={this.state.sidebarOpened}>*/}
+          {/*<Dimmer inverted active={this.state.sidebarOpened} />*/}
+          <Divider hidden fitted/>
           <Grid columns={3}>
             <Grid.Row>
               <Grid.Column width={1}>
@@ -111,9 +158,9 @@ class App extends Component {
 				        </Helmet>
                         <DashboardComponent posts={[
                             {title: 'Current plan', body: 'Empty', id: 3, userId: 1, src: current_plan},
-                            {title: 'Top engaging companies', body: 'Empty', id: 2, userId: 1, src: top_engaging_companies},
-                            {title: 'Top bouncing domain', body: 'Empty', id: 3, userId: 1, src: top_bouncing_domain},
-                            {title: 'Status for selected time period', body: 'Empty', id: 4, userId: 1, src: selected_time_period},
+                            {title: 'Top engaging compaigns in the last 30 days', body: 'Empty', id: 2, userId: 1, src: top_engaging_companies},
+                            {title: 'Top bouncing domain in the last 30 days', body: 'Empty', id: 3, userId: 1, src: top_bouncing_domain},
+                            {title: 'Status for the selected time period', body: 'Empty', id: 4, userId: 1, src: selected_time_period},
                             ]} postsLoaded={true} />
                       </div>
                     : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
@@ -125,9 +172,22 @@ class App extends Component {
 
                     return (
                         this.state.isAuthenticated
-                            ? <div>
-                                <UsersList users={this.state.users} title={'All Users'} tableHeader={senderFiledsLabel} tableFields={userFileds} />
-                            </div>
+                            ? (
+                                <Card.Group itemsPerRow={1} doubling stackable>
+                                    <DashboardCardComponent
+                                        title={'User list'}
+                                        state={this.state}
+                                        senderFiledsLabel={senderFiledsLabel}
+                                        userFileds={userFileds}
+                                        render={(props) => {
+                                        return (
+                                           <UsersList users={props.state.users} tableHeader={props.senderFiledsLabel}
+                                           tableFields={props.userFileds}/>
+                                        )
+                                    }}
+                                    />
+                                </Card.Group>
+                            )
                             : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
                     )
                 }}/>
@@ -175,9 +235,9 @@ class App extends Component {
                   />
                 )} />
                 <Route exact path='/status' render={(props) => (
-                  <UserStatus
-                    isAuthenticated={this.state.isAuthenticated}
-                  />
+                    this.state.isAuthenticated
+                        ? <UserStatus isAuthenticated={this.state.isAuthenticated} />
+                        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
                 )}/>
               </Switch>
               </Grid.Column>
@@ -185,6 +245,9 @@ class App extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
+          {/*</Dimmer.Dimmable>*/}
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
     )
   }

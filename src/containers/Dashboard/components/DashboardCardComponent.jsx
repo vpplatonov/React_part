@@ -9,19 +9,30 @@ export default class DashboardCardComponent extends Component {
 		userId: PropTypes.number,
 		id: PropTypes.number,
 		src: PropTypes.string,
+		extra: PropTypes.func,
+		render: PropTypes.func,
 	};
 
 	render () {
 		return (
-			<Card raised>
-				<Image alt={this.props.title} src={this.props.src}/>
+			<Card raised color='olive'>
 				<Card.Content>
 					<Card.Header>
-						{this.props.title}
 					</Card.Header>
+					{this.props.title}
+					{this.props.src &&
+					<Image alt={this.props.title} src={this.props.src}/>
+					}
+					{this.props.render && this.props.render(this.props)}
 					<Card.Meta>
 					</Card.Meta>
 				</Card.Content>
+				{this.props.extra &&
+					// extra has opacity 0.4
+				<Card.Content extra>
+					{this.props.extra(this.props.extra)}
+				</Card.Content>
+				}
 			</Card>
 		)
 	}
