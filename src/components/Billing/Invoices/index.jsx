@@ -83,7 +83,7 @@ class BillingInvoices extends Component {
     }
 
     getInvoices() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/billing/invoices`)
+      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/billing/invoices`)
         .then((res) => { this.setState({ invoices: res.data.data.invoices }); })
         .catch((err) => { console.log(err); })
     }
