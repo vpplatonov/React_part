@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import { Sidebar, Dimmer, Segment, Grid, Divider } from 'semantic-ui-react';
-import { Card } from 'semantic-ui-react';
-import DashboardCardComponent from './containers/Dashboard/components/DashboardCardComponent';
+import { Sidebar, Dimmer, Segment, Grid, Divider, Card } from 'semantic-ui-react';
 
+import DashboardCardComponent from './containers/Dashboard/components/DashboardCardComponent';
 import UsersList from './components/UsersList';
 import About from './components/About';
 import NavBar from './components/Navigation/Navbar';
@@ -15,6 +13,8 @@ import Logout from './components/Logout';
 import UserStatus from './components/UserStatus';
 import DashboardComponent from './containers/Dashboard/components/';
 import DashboardLogin from './components/DashboardLogin/DashboardLogin';
+import BillingInvoices from './components/Billing/Invoices';
+
 import LogoSMTP from './components/LogoSMTP';
 import btn_icon_141863 from './components/Navigation/btn_icon_141863.png';
 
@@ -192,6 +192,14 @@ class App extends Component {
                     )
                 }}/>
 
+                <Route exact path='/billing/invoices' render={(props) => {
+                    return (
+                        this.state.isAuthenticated
+                            ? <BillingInvoices />
+                            : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
+                    )
+                }}/>
+
 
                 <Route exact path='/senders' render={(props) => {
                     const senderFiledsLabel = ['Sender ID', 'Email', 'User name', 'Created Date', 'Status', 'IP pool ID'];
@@ -201,7 +209,7 @@ class App extends Component {
                         this.state.isAuthenticated
                             ? <div>
                                 <UsersList users={this.state.senders} title={'Senders'} tableHeader={senderFiledsLabel} tableFields={senderFileds} rowsPerPage={10} />
-                            </div>
+                              </div>
                             : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
                     )
                 }}/>
