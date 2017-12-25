@@ -4,7 +4,7 @@ import { Icon, Menu, Table } from 'semantic-ui-react';
 const UsersList = (props) => {
   return (
     <div>
-      <h4>{props.title}</h4>
+      {props.title && <h4>{props.title}</h4>}
       <Table compact size='small' basic>
         <Table.Header className='backColor'>
           <Table.Row>

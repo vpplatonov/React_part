@@ -7,6 +7,21 @@
   background-color: #f7f7f7;
 }
 
+.ui.segment.dimmable, .ui.segment.pushable {
+    border: none;
+    border-radius: 0;
+    margin-top: 4px;
+}
+
+.root .ui.segment.pushable {
+    overflow: auto;
+}
+
+.ui.vertical.menu .item>i.icon.left {
+  float: left;
+  margin: 0 .5em 0 .5em;
+}
+
 table thead.backColor {
   background-color: #bfda5a;
 }
@@ -14,6 +29,7 @@ table thead.backColor {
 .ui.menu.noBorderBoxShadow {
   border: none;
   box-shadow: none;
+  width: 100%;
 }
 
 .App .baseFont * { /* Base font style override for UI framework components */
@@ -1313,7 +1329,7 @@ table thead.backColor {
 
 
   .MainMenuMobileComponent .elComp {
-    margin-top: 40px;
+    margin-top: 4px;
     margin-left: 0px;
     margin-right: 0px;
     width: calc(100.0% - 0px);

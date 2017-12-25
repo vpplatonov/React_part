@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import { Menu, Accordion, Icon, Divider } from 'semantic-ui-react';
+import { Sidebar, Menu, Accordion, Icon, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
@@ -18,8 +18,8 @@ export default class MobileMenu extends Component {
                     {
                         Object.keys(subMenuObj.children).map((child) => {
                             return (
-                                <Menu.Item as={Link} to={subMenuObj.children[child].to} key={child}>
-                                    {subMenuObj.children[child].text}
+                                <Menu.Item as={Link} to={subMenuObj.children[child].to} key={child} >
+                                    <Icon name={subMenuObj.children[child].icon} inverted color='olive' />{subMenuObj.children[child].text}
                                 </Menu.Item>
                             )
                         })
@@ -39,20 +39,20 @@ export default class MobileMenu extends Component {
     };
 
     accordeonMenuRender(subMenuObj, index = 0) {
+
         return (
             <Accordion inverted>
               <Accordion.Title active={this.state.activeIndex === index} index={index} onClick={this.handleClick}>
                 <Icon name='dropdown' />
-                    {subMenuObj.text}
+                    {subMenuObj.icon && <Icon name={subMenuObj.icon} style={{ float: 'right', paddingRight: '30px'}} />}{subMenuObj.text}
               </Accordion.Title>
-              <Accordion.Content active={this.state.activeIndex === index}>
-                <Menu.Menu>
-                    {/*<Menu.Header>{subMenuObj.text}</Menu.Header>*/}
+              <Accordion.Content active={this.state.activeIndex === index} className={'ui'}>
+                <Menu.Menu icon='labeled'>
                     {
                         Object.keys(subMenuObj.children).map((child) => {
                             return (
-                                <Menu.Item as={Link} to={subMenuObj.children[child].to} key={child}>
-                                    {subMenuObj.children[child].text}
+                                <Menu.Item as={Link} to={subMenuObj.children[child].to} key={child} color='olive' onClick={subMenuObj.onClick}>
+                                     <Icon name={subMenuObj.children[child].icon} inverted color='olive' className={'left'} />{subMenuObj.children[child].text}
                                 </Menu.Item>
                             )
                         })
@@ -63,57 +63,44 @@ export default class MobileMenu extends Component {
         )
     }
 
+    mainMenuItemRender(subMenuObj, i = 0) {
+        if ('children' in subMenuObj ) {
+            return (
+                <div key={subMenuObj.text}>
+                <Divider fitted/>
+                {this.accordeonMenuRender(subMenuObj, i)}
+                </div>
+            );
+        }
+        else {
+            return (
+                <div key={subMenuObj.text}>
+                {i > 0 && <Divider fitted/>}
+                <Menu.Item as={Link} to={subMenuObj.to} onClick={subMenuObj.onClick}>
+                    {subMenuObj.icon && <Icon name={subMenuObj.icon} />}{subMenuObj.text}
+                </Menu.Item>
+                </div>
+            )
+        }
+    }
+
     render() {
-        const {menuLinks} = this.props;
+        const {menuLinks, visible, onClick} = this.props;
 
         return (
-            <Menu fluid vertical inverted>
-                {menuLinks.dashboard.visible &&
-                  <Menu.Item as={Link} to={menuLinks.dashboard.to}>
-                      {menuLinks.dashboard.text}
-                  </Menu.Item>
+            //<Menu fluid vertical inverted borderless>
+            <Sidebar as={Menu} animation='overlay' direction='top' visible={visible} vertical inverted borderless>
+                {
+                    Object.keys(menuLinks).map((mItem, i) => {
+                        menuLinks[mItem].onClick = onClick;
+                        return (
+                            menuLinks[mItem].visible && this.mainMenuItemRender(menuLinks[mItem], i)
+                        )
+                    })
                 }
 
-                <Divider fitted/>
-                {menuLinks.statistics.visible  &&
-                    this.accordeonMenuRender(menuLinks.statistics, 0)
-                }
-
-                <Divider fitted/>
-                {menuLinks.settings.visible &&
-                    this.accordeonMenuRender(menuLinks.settings, 1)
-                }
-
-                <Divider fitted/>
-                {menuLinks.billing.visible &&
-                    this.accordeonMenuRender(menuLinks.billing, 2)
-                }
-
-                <Divider fitted/>
-                {menuLinks.account.visible &&
-                    this.accordeonMenuRender(menuLinks.account, 3)
-                }
-
-                <Menu.Item as={Link} to='/about'>
-                  About
-                </Menu.Item>
-
-                <Divider fitted/>
-                {menuLinks.admin.visible &&
-                    this.accordeonMenuRender(menuLinks.admin, 4)
-                }
-
-                {menuLinks.login.visible &&
-                    <Menu.Item as={Link} to={menuLinks.login.to}>
-                         {menuLinks.login.text}
-                    </Menu.Item>
-                }
-                {menuLinks.logout.visible &&
-                    <Menu.Item as={Link} to={menuLinks.logout.to}>
-                        {menuLinks.logout.text}
-                    </Menu.Item>
-                }
-            </Menu>
+            </Sidebar>
+            //</Menu>
         )
     }
 }

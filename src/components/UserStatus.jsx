@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Card } from 'semantic-ui-react';
+import DashboardCardComponent from './../containers/Dashboard/components/DashboardCardComponent';
 
 class UserStatus extends Component {
   constructor (props) {
@@ -19,7 +21,7 @@ class UserStatus extends Component {
   }
   getUserStatus(event) {
     const options = {
-      url: `${process.env.REACT_APP_USERS_SERVICE_URL}/api/auth/status`,
+      url: `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/status`,
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -42,13 +44,22 @@ class UserStatus extends Component {
         return <p>You must be logged in to view this. Click <Link to="/login">here</Link> to log back in.</p>
     }
     return (
-      <div>
-          <ul>
-            <li><strong>User ID:</strong> {this.state.id}</li>
-            <li><strong>Email:</strong> {this.state.email}</li>
-            <li><strong>Username:</strong> {this.state.username}</li>
-          </ul>
-      </div>
+
+        <Card.Group itemsPerRow={1} doubling stackable>
+            <DashboardCardComponent title={'User status'} state={this.state} render={(props) => {
+                return (
+                <div>
+                    <ul>
+                        <li><strong>User ID: </strong>{props.state.id}</li>
+                        <li><strong>Email: </strong>{props.state.email}</li>
+                        <li><strong>Username: </strong>{props.state.username}</li>
+                        <li><strong>Created: </strong>{props.state.created_at}</li>
+                    </ul>
+                </div>
+                )
+            }}
+            />
+        </Card.Group>
     )
   }
 }

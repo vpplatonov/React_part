@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { Menu, Dropdown, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
@@ -11,28 +11,53 @@ export default class DesktopMenu extends Component {
 
     subMenuRender(subMenuObj) {
         return (
-        <Dropdown text={subMenuObj.text} className='link item' key={subMenuObj.text}>
-            <Dropdown.Menu>
-               {
-                    Object.keys(subMenuObj.children).map((child) => {
-                        return (
-                            <Dropdown.Item text={subMenuObj.children[child].text}  as={Link} to={subMenuObj.children[child].to} key={child}/>
-                        )
-                    })
-                }
-            </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown text={subMenuObj.text} className='link item' key={subMenuObj.text}>
+                <Dropdown.Menu>
+                    {
+                        Object.keys(subMenuObj.children).map((child) => {
+                            return (
+                                <Dropdown.Item
+                                    text={subMenuObj.children[child].text}
+                                    as={Link}
+                                    to={subMenuObj.children[child].to}
+                                    key={child}
+                                    icon={subMenuObj.children[child].icon}
+                                    className='icon'/>
+                            )
+                        })
+                    }
+                </Dropdown.Menu>
+            </Dropdown>
+        )
+    }
+
+
+    subMenuCSSRender(subMenuObj) {
+        const options = Object.keys(subMenuObj.children).map((child, i) => {
+            return {
+                key: i,
+                text: subMenuObj.children[child].text,
+                href: subMenuObj.children[child].to,
+                as: 'a',
+                icon: subMenuObj.children[child].icon,
+                style: {pointerEvents: 'none'}
+            }
+        });
+
+        return (
+            <Dropdown text={subMenuObj.text} options={options} simple item key={subMenuObj.text} />
         )
     }
 
     mainMenuItemRender(subMenuObj) {
         if ('children' in subMenuObj ) {
+            //return (this.subMenuCSSRender(subMenuObj));
             return (this.subMenuRender(subMenuObj));
         }
         else {
             return (
                 <Menu.Item as={Link} to={subMenuObj.to} key={subMenuObj.text}>
-                    {subMenuObj.text}
+                    {subMenuObj.icon && <Icon name={subMenuObj.icon} />}{subMenuObj.text}
                 </Menu.Item>
             )
         }
@@ -42,6 +67,7 @@ export default class DesktopMenu extends Component {
         const {menuLinks} = this.props;
 
         return (
+            // For CSS control add compact prop && use subMenuCSSRender().
             <Menu borderless className={"noBorderBoxShadow"}>
                 <Menu.Menu position='right'>
                     {
@@ -51,7 +77,6 @@ export default class DesktopMenu extends Component {
                             )
                         })
                     }
-
                 </Menu.Menu>
             </Menu>
         )
