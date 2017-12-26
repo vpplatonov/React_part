@@ -47,7 +47,7 @@ const UsersList = (props) => {
           }
         </Table.Body>
 
-          {props.rowsPerPage && props.users.length > 0 &&
+          {props.rowsPerPage && props.users.length > props.rowsPerPage &&
           <Table.Footer>
               <Table.Row>
                   <Table.HeaderCell colSpan={props.tableHeader.length} textAlign='center'>

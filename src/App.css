@@ -11,10 +11,19 @@
     border: none;
     border-radius: 0;
     margin-top: 4px;
+    box-shadow: none;
 }
 
 .root .ui.segment.pushable {
     overflow: auto;
+}
+
+.fields .ui.segment, body .ui.segment {
+   box-shadow: none;
+   margin: 0;
+   padding: 0;
+   border-radius: 0;
+   border: 0;
 }
 
 .ui.vertical.menu .item>i.icon.left {
@@ -24,6 +33,10 @@
 
 table thead.backColor {
   background-color: #b2d248;
+}
+
+.ui.segment i.icon.actionColor {
+  background-color: #7fa10c!important;
 }
 
 .ui.menu .input-calendar-wrapper {

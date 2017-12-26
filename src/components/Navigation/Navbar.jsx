@@ -5,7 +5,7 @@ import MainMenuMobileComponent from './MainMenuMobileComponent';
 
 class NavBar extends Component {
     constructor (props) {
-        super(props);
+        super();
         this.state = {};
     }
 
@@ -71,7 +71,7 @@ class NavBar extends Component {
                         icon: 'settings'
                     },
                     senders: {
-                        to: '/senders',
+                        to: '/settings/senders',
                         text: 'Senders',
                         description: 'My senders',
                         icon: 'object group'

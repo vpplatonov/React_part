@@ -14,6 +14,7 @@ import UserStatus from './components/UserStatus';
 import DashboardComponent from './containers/Dashboard/components/';
 import DashboardLogin from './components/DashboardLogin/DashboardLogin';
 import BillingInvoices from './components/Billing/Invoices';
+import SettingsSenders from './components/Settings/Senders';
 
 import LogoSMTP from './components/LogoSMTP';
 import btn_icon_141863 from './components/Navigation/btn_icon_141863.png';
@@ -29,7 +30,6 @@ class App extends Component {
     super()
     this.state = {
       users: [],
-      senders: [],
       title: 'TestDriven.io',
       isAuthenticated: false,
       isAdmin: false,
@@ -46,11 +46,6 @@ class App extends Component {
         .then((res) => { this.setState({ users: res.data.data.users }); })
         .catch((err) => { console.log(err); })
   }
-  getSenders() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/senders`)
-        .then((res) => { this.setState({ senders: res.data.data.senders }); })
-        .catch((err) => { console.log(err); })
-  }
   logoutUser() {
     window.localStorage.clear();
     this.setState({ isAuthenticated: false, isAdmin: false, sidebarOpened: false});
@@ -59,16 +54,24 @@ class App extends Component {
     window.localStorage.setItem('authToken', token);
     this.setState({ isAuthenticated: true, isAdmin: is_admin });
     this.getUsers();
-    this.getSenders();
   }
 
   windowDidResize = () => {
     let w = window.innerWidth;
+    var h = window.innerHeight;
+    let rootElement = document.getElementById('root');
+    rootElement.style.minHeight = `${h}px`;
     let formatId;
     if (w < 576) formatId = 'narrow-phone';
     else if (w < 768) formatId = 'wide-phone';
     else if (w < 1024) formatId = 'narrow-tablet';
-    else formatId = 'wide-tablet';
+    else {
+        formatId = 'wide-tablet';
+        let rootSegment = document.querySelector('.ui,.segment,.pushable');
+        rootSegment.style.minHeight = `${h-34}px`;
+        let rootPusher = document.querySelector('.pusher');
+        rootPusher.style.minHeight = `${h-104}px`;
+    }
     if (formatId !== this.state.screenFormatId) {
       this.setState({screenFormatId: formatId});
     }
@@ -200,16 +203,10 @@ class App extends Component {
                     )
                 }}/>
 
-
-                <Route exact path='/senders' render={(props) => {
-                    const senderFiledsLabel = ['Sender ID', 'Email', 'User name', 'Created Date', 'Status', 'IP pool ID'];
-                    const senderFileds = ['id', 'login',  'label', 'created_at', 'status', 'ip_pool_id'];
-
+                <Route exact path='/settings/senders' deviceInfo={deviceInfo} render={(props) => {
                     return (
                         this.state.isAuthenticated
-                            ? <div>
-                                <UsersList users={this.state.senders} title={'Senders'} tableHeader={senderFiledsLabel} tableFields={senderFileds} rowsPerPage={10} />
-                              </div>
+                            ? <SettingsSenders deviceInfo={props.deviceInfo}/>
                             : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
                     )
                 }}/>

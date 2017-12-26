@@ -33,16 +33,17 @@ class BillingInvoices extends Component {
     }
 
     getInvoicesMock() {
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
         this.setState({invoices: [
               {
                 id: "2c92c0f86078c59901607d2d808a6b21",
                 adjustment_amount: 0,
-                amount: 151.13,
+                amount: '$151.13',
                 balance: 0,
                 comments: null,
                 created_date: 1513928622,
                 "due_date": 1513929600,
-                "invoice_date": `${(new Date(1513929600)).toString()}`,
+                "invoice_date": `${new Date(1513929600000).toLocaleDateString('en-US', options)}`,
                 "invoice_number": "INV00230649",
                 "last_email_sent_date": 0,
                 "payment_amount": "151.13",
@@ -54,17 +55,17 @@ class BillingInvoices extends Component {
                 "service_start_date": 1513843200,
                 "service_end_date": 1516003200,
                 "account_id": 2153055,
-                 billing_period: `${(new Date(1513843200)).toString()} - ${(new Date(1516003200)).toString()}`
+                 billing_period: `${(new Date(1513843200000)).toLocaleDateString('en-US', options)} - ${(new Date(1516003200000)).toLocaleDateString('en-US', options)}`
               },
               {
                 "id": "2c92c0f95c14fb2c015c15653b080c7a",
                 "adjustment_amount": 0,
-                "amount": 14.52,
+                "amount": '$14.52',
                 "balance": 0,
                 "comments": null,
                 "created_date": 1495007574,
                 "due_date": 1495004400,
-                "invoice_date": `${(new Date(1495004400)).toString()}`,
+                "invoice_date": `${(new Date(1495004400000)).toLocaleDateString('en-US', options)}`,
                 "invoice_number": "INV00230594",
                 "last_email_sent_date": 0,
                 "payment_amount": "14.52",
@@ -76,7 +77,7 @@ class BillingInvoices extends Component {
                 "service_start_date": 1495004400,
                 "service_end_date": 1497510000,
                 "account_id": 2153055,
-                   billing_period: `${(new Date(1495004400)).toString()} - ${(new Date(1497510000)).toString()}`
+                   billing_period: `${(new Date(1495004400000)).toLocaleDateString('en-US', options)} - ${(new Date(1497510000000)).toLocaleDateString('en-US', options)}`
               }
             ]
           });
@@ -92,6 +93,7 @@ class BillingInvoices extends Component {
 
         const senderFiledsLabel = ['INVOICE Date', 'Billing period', 'Amount', 'Download'];
         const senderFileds = ['invoice_date', 'billing_period', 'amount', 'id'];
+        const rowsPerPage = 10;
 
         return (
             <div>
@@ -111,13 +113,13 @@ class BillingInvoices extends Component {
                        onChange={this.setEndDate.bind(this)}
                        inputName={'endDate'} />
                     </div>
-                    <Button size='small'>Apply</Button>
+                    <Button>Apply</Button>
                 </Menu>
                 <UsersList
                     users={this.state.invoices}
                     tableHeader={senderFiledsLabel}
                     tableFields={senderFileds}
-                    rowsPerPage={10} />
+                    rowsPerPage={rowsPerPage} />
             </div>
         );
     };
