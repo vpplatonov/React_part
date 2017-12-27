@@ -36,14 +36,44 @@ class App extends Component {
       sidebarOpened: false
     }
   }
+  componentWillReceiveProps(nextProps) {
+      this.checkUserIsAuthenticated();
+  }
   componentDidMount() {
-    this.windowDidResize();
-    window.addEventListener('resize', this.windowDidResize);
-    this.getUsers();
+      this.checkUserIsAuthenticated();
+      this.windowDidResize();
+      window.addEventListener('resize', this.windowDidResize);
+  }
+  checkUserIsAuthenticated() {
+      const options = {
+          url: `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/check`,
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${window.localStorage.authToken}`
+          }
+      };
+      return axios(options)
+        .then((res) => {
+            this.setState({ isAuthenticated: true, isAdmin: res.data.data.admin });
+        })
+        .catch((err) => {
+            this.logoutUser();
+        })
   }
   getUsers() {
-      axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/users`)
-        .then((res) => { this.setState({ users: res.data.data.users }); })
+      const options = {
+          url: `${process.env.REACT_APP_USERS_SERVICE_URL}/users`,
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${window.localStorage.authToken}`
+          }
+      };
+      return axios(options)
+        .then((res) => {
+            this.setState({ users: res.data.data.users });
+        })
         .catch((err) => { console.log(err); })
   }
   logoutUser() {

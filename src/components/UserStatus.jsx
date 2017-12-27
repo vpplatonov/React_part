@@ -21,8 +21,8 @@ class UserStatus extends Component {
   }
   getUserStatus(event) {
     const options = {
-      url: `${process.env.REACT_APP_USERS_SERVICE_URL}/api/auth/status`,
-      method: 'get',
+      url: `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/status`,
+      method: 'post',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${window.localStorage.authToken}`

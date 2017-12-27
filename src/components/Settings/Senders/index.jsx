@@ -42,7 +42,7 @@ class SettingsSenders extends Component {
     }
 
     getSenders() {
-          axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/api/settings/senders`)
+          axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/settings/senders`)
                 .then((res) => {
                     this.setState({ senders: res.data.data.senders });
                 })
