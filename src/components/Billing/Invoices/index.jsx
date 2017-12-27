@@ -108,10 +108,10 @@ class BillingInvoices extends Component {
                         inputName={'startDate'} />
                     <Calendar
                         // format='DD/MM/YYYY'
-                       date={this.state.endDate.toString()}
-                       // computableFormat='DD/MM/YYYY'
-                       onChange={this.setEndDate.bind(this)}
-                       inputName={'endDate'} />
+                        date={this.state.endDate.toString()}
+                        // computableFormat='DD/MM/YYYY'
+                        onChange={this.setEndDate.bind(this)}
+                        inputName={'endDate'} />
                     </div>
                     <Button>Apply</Button>
                 </Menu>

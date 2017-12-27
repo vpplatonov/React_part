@@ -7,6 +7,15 @@
   background-color: #f7f7f7;
 }
 
+@media only screen and (max-width: 767px) {
+    .ui.stackable.menu .input-calendar {
+        width: 50%;
+    }
+    .ui.stackable.menu .endDate.input-calendar {
+        left: -70px;
+    }
+}
+
 .ui.segment.dimmable, .ui.segment.pushable {
     border: none;
     border-radius: 0;

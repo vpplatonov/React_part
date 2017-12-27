@@ -51,9 +51,12 @@ export default class MobileMenu extends Component {
                     {
                         Object.keys(subMenuObj.children).map((child) => {
                             return (
+                                <div key={child}>
+                                <Divider fitted hidden/>
                                 <Menu.Item as={Link} to={subMenuObj.children[child].to} key={child} color='olive' onClick={subMenuObj.onClick}>
                                      <Icon name={subMenuObj.children[child].icon} inverted color='olive' className={'left'} />{subMenuObj.children[child].text}
                                 </Menu.Item>
+                                </div>
                             )
                         })
                     }

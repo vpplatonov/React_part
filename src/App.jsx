@@ -59,18 +59,20 @@ class App extends Component {
   windowDidResize = () => {
     let w = window.innerWidth;
     var h = window.innerHeight;
+
     let rootElement = document.getElementById('root');
     rootElement.style.minHeight = `${h}px`;
+    let rootSegment = document.querySelector('.ui,.segment,.pushable');
+    rootSegment.style.minHeight = `${h-34}px`;
+    let rootPusher = document.querySelector('.pusher');
+    rootPusher.style.minHeight = `${h-104}px`;
+
     let formatId;
     if (w < 576) formatId = 'narrow-phone';
     else if (w < 768) formatId = 'wide-phone';
     else if (w < 1024) formatId = 'narrow-tablet';
     else {
         formatId = 'wide-tablet';
-        let rootSegment = document.querySelector('.ui,.segment,.pushable');
-        rootSegment.style.minHeight = `${h-34}px`;
-        let rootPusher = document.querySelector('.pusher');
-        rootPusher.style.minHeight = `${h-104}px`;
     }
     if (formatId !== this.state.screenFormatId) {
       this.setState({screenFormatId: formatId});

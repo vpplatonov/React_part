@@ -33,7 +33,7 @@ class SettingsSenders extends Component {
         else {
             this.closePortalHandler();
         }
-    }
+    };
 
     componentDidMount() {
         this.windowDidScroll();
@@ -57,7 +57,8 @@ class SettingsSenders extends Component {
         const selectOptions = [
             {text: 'All', active: true, key: 0, value: 'all'},
             {text: 'Active', key: 1, value: 'active'},
-            {text: 'Inactive', key: 2, value: 'inactive'}];
+            {text: 'Inactive', key: 2, value: 'inactive'}
+        ];
 
         return (
             <div>
@@ -70,10 +71,8 @@ class SettingsSenders extends Component {
                         </Responsive>
                         <Portal
                             open={this.state.openPortal}
-                            defaultOpen={true}
                             closeOnDocumentClick={false}
-                            closeOnEscape={false}
-                        >
+                            closeOnEscape={false}>
                             <Responsive as={Segment} maxWidth={769} style={{ right: '50px', position: 'fixed', bottom: '50px', zIndex: 1000 }}>
                               <Icon.Group size='big'>
                                 <Icon circular name='object group' inverted className={'actionColor'} />
